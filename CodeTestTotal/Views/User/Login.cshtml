@@ -1,0 +1,28 @@
+﻿@using CodeTestTotal.ViewModel
+@model LoginViewModel
+
+
+<div class="mensajeDeContacto">
+    <h3 class="mb-3">TotalSell</h3>
+</div>
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<div class="container ">
+
+    <form asp-controller="User" asp-action="Login" class="formContacto">
+        <div class="mb-3">
+            <label asp-for="Username" class="form-label"></label>
+            <input asp-for="Username" class="form-control controls " />
+            <span asp-validation-for="Username" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Password" class="form-label"></label>
+            <input asp-for="Password" class="form-control controls " />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn-lg btnEnviar">Login</button>
+        <a class="btn btn-outline-success" asp-action="Registro">Crear una nueva cuenta</a>
+    </form>
+</div>

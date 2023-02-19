@@ -1,0 +1,29 @@
+﻿@model List<Mascota>
+@{
+    ViewData["Title"] = "Hola";
+}
+
+<section class="misMascotas">
+
+    @foreach (Mascota item in Model)
+    {
+        <article class="Mascota">
+            <h2>@item.MascotaNombre</h2>
+            <div class="Mascota_imagenes">
+                <img src="/Images/@item.MascotaImg" alt="@item.MascotaNombre" title="@item.MascotaNombre" class="Mascota_foto">
+                @if(item.MascotaTipo == "P")
+                {
+                    <img src="/Images/perro.png" class="mascota_tipo">
+                }
+                else
+                {
+                    <img src="/Images/gato.png" class="mascota_tipo">
+                }
+            </div>
+            <a href="" class="btnInfo">Información</a>
+
+        </article>
+    }
+
+</section>
+

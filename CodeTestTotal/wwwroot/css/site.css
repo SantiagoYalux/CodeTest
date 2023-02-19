@@ -1,0 +1,122 @@
+* {
+    font-family: 'Times New Roman', Times, serif;
+}
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.mensajeDeContacto{
+    text-align:center;
+
+}
+/*Users Views*/
+.formContacto {
+    width: 400px;
+    background: #24303c;
+    padding: 30px;
+    margin: auto;
+    margin-top: 100px;
+    border-radius: 4px;
+    font-family: 'calibri';
+    color: white;
+    box-shadow: 7px 13px 37px #000;
+}
+.formContacto button {
+    color: white;
+    text-decoration: none;
+}
+.formContacto button:hover {
+    color: white;
+    text-decoration: underline;
+}
+.formContacto button {
+    width: 100%;
+    background: #1f53c5;
+    border: none;
+    padding: 12px;
+    color: white;
+    margin: 16px 0;
+    font-size: 16px;
+}
+
+@media (max-width: 600px) {
+
+    .formContacto {
+        width: 100% !important;
+    }
+
+}
+
+@media (max-width: 800px) {
+
+    .formContacto {
+        width: 60% !important;
+    }
+}
+
+
+/*End users views*/
+.misMascotas {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.Mascota {
+    display: flex;
+    flex-direction: column;
+    margin: 1em;
+}
+
+.Mascota_foto {
+    width: 13em;
+    border-radius:1em;
+    border:1px double black;
+}
+
+.Mascota_imagenes {
+    display: inline-block;
+    position: relative;
+}
+
+.mascota_tipo {
+    background-color: white;
+    position: absolute;
+    bottom: -1em;
+    right: -1em;
+    border-radius: 5em;
+    padding: .3em;
+    border: 1px solid black;
+    width: 3em;
+}
+
+.Mascota h2 {
+    background-color: white;
+    font-size:1.2em;
+    padding:0em 0em 0em 0em;
+}
+
+.btnInfo {
+    text-decoration: none;
+    background-color: #bbc4bd;
+    color: whitesmoke;
+    font-size: 1.2em;
+    margin-top: .2em;
+    text-align: center;
+    border-radius: 10em;
+}
+/*END*/

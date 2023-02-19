@@ -1,0 +1,21 @@
+[
+
+  {
+    "MascotaID": 1,
+    "MascotaNombre": "Larry",
+    "MascotaTipo": "P",
+    "MascotaImg": "Larry.jpg",
+    "MascotaDescrip": "Ésta es la descripción de la primera mascota",
+    "MascotaEdad": 5,
+    "MascotaClientID": 1
+  },
+  {
+    "MascotaID": 2,
+    "MascotaNombre": "DonGato",
+    "MascotaTipo": "G",
+    "MascotaImg": "DonGato.jpg",
+    "MascotaDescrip": "Ésta es la descripción de la segunda mascota",
+    "MascotaEdad": 2,
+    "MascotaClientID": 1
+  }
+]
