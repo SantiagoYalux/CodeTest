@@ -62,7 +62,10 @@ namespace CodeTestTotal.Models
             string context = await File.ReadAllTextAsync(PedidosJsonPath);
 
             /*deserialize the content and assign to the User list*/
-            Pedidos = JsonSerializer.Deserialize<List<Pedido>>(context);
+            if (context.Length > 0)
+                Pedidos = JsonSerializer.Deserialize<List<Pedido>>(context);
+            else
+                Pedidos = new List<Pedido>();
         }
         private async void FillVendedores()
         {
@@ -93,14 +96,14 @@ namespace CodeTestTotal.Models
                 case "Usuario":
                     Usuarios.Add((Usuario)newObject);
                     var JsonUsuarios = JsonSerializer.Serialize(Usuarios);
-                    
+
                     System.IO.File.WriteAllText(UsuariosJsonPath, JsonUsuarios);
                     resultado = true;
                     break;
                 case "Vendedor":
                     Vendedores.Add((Vendedor)newObject);
                     var JsonVendedores = JsonSerializer.Serialize(Vendedores);
-                    
+
                     System.IO.File.WriteAllText(VendedoresJsonPath, JsonVendedores);
                     resultado = true;
                     break;

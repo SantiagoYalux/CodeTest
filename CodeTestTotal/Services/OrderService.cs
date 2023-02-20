@@ -27,6 +27,8 @@ namespace CodeTestTotal.Services
 
             oNewPedido.PedidoComplementoAlimientoCastrado = oNewOrderViewModel.CantComplementoAlimientoCastrado;
 
+            oNewPedido.PedidoFecha = DateTime.Now;
+            oNewPedido.PedidoFechaDespachado = DateTime.Now;
             /*when registering the new order the following fields will not be filled*/
             oNewPedido.PedidoDespachado = null;
             oNewPedido.PedidoVendedorID = null;
