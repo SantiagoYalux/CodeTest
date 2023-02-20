@@ -1,4 +1,22 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿/*Open modal new orden page*/
 
-// Write your JavaScript code.
+//var button = document.getElementById("btnOpenModalNewOrder");
+//button.onclick = OpenPopUpNewOrder;
+
+//const url = '/OrderController/NewOrder' 
+
+//async function OpenPopUpNewOrder(EventArgs) {
+//    var divNewOrden = document.getElementById("id01");
+//    divNewOrden.style.display = 'block';
+
+//    await fetch(url, {
+//        method: 'POST',
+//        body: data,
+//        headers: {
+//            'Content-Type':'application/json'
+//            }
+//    }).then((valor) => {
+//        console.log(valor);
+//    })
+//}
+/**/ 

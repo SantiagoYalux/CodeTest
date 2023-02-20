@@ -7,5 +7,6 @@ namespace CodeTestTotal.Interfaces
     {
         Task<bool> AddNewPetAsync(AddPetViewModel AddPetViewModel, int clientID);
         List<Mascota> GetClientsPets(int clientID);
+        Mascota GetPetByID(int MascotaID);
     }
 }

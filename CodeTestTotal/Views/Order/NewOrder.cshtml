@@ -1,59 +1,61 @@
 ﻿@using CodeTestTotal.ViewModel;
-@model AddPetViewModel
+@model NewOrdenViewModel
 
+<!-- The Modal -->
+<!-- Modal Content -->
 
-<div class="modal-dialog">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Nueva mascota</h5>
-        </div>
+<h2 style="text-align:center;">Combo para @Model.MascotaNombre</h2>
 
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<section class="PetData">
 
+    <div>
+        <p>Peso</p>
+        <p>
+            @Model.MascotaPeso kg
+        </p>
+    </div>
+    
+    <div>
+        <p>Edad</p>
+        <p>
+            @Model.MascotaEdad años
+        </p>
+    </div>
+    <div>
+        <p>Castrado</p>
+        @if(@Model.MascotaCastrado)
+        {
+            <p>SI</p>
+        }
+        else
+        {
+            <p>NO</p>
+        }
+    </div>
+</section>
+<form class="modal-content animate formNewOrder" asp-action="NewOrder" enctype="multipart/form-data">
 
-        <div class="modal-body">
-            <form asp-controller="Pet" asp-action="AddPet" enctype="multipart/form-data">
+    <div class="container formContent">
+        <input asp-for="MascotaID" type="text" hidden/>
+        
+        <label asp-for="CantidadAlimiento"><b>Alimiento</b></label>
+        <input type="text" asp-for="CantidadAlimiento" required >
+        <span asp-validation-for="CantidadAlimiento" class="text-danger"></span>
 
-                <div class="mb-3">
-                    <label asp-for="MascotaNombre" class="form-label">Nombre</label>
-                    <input type="text" asp-for="MascotaNombre" class="form-control" />
-                    <span asp-validation-for="MascotaNombre" class="text-danger"></span>
-                </div>
+        <label asp-for="CantComplementoAlimientoEdad"><b>Complemento dietario</b></label>
+        <input type="text" asp-for="CantComplementoAlimientoEdad" required>
+        <span asp-validation-for="CantComplementoAlimientoEdad" class="text-danger"></span>
 
-                <div>
-                    <label asp-for="MascotaTipo" class="form-label">Tipo</label>
-                    @Html.DropDownListFor(x=>x.MascotaTipo, (IEnumerable<SelectListItem>)ViewBag.OpcionesTipoMascota)
-                    <span asp-validation-for="MascotaTipo" class="text-danger"></span>
-                </div>
-
-                <div class="mb-3">
-                    <label asp-for="MascotaImg" class="form-label">Imagen:</label>
-                    <input asp-for="MascotaImg" type="file" class="form-control" />
-                </div>
-
-                <div class="mb-3">
-                    <label asp-for="MascotaDescrip" class="form-label">Descripción</label>
-                    <input type="text" asp-for="MascotaDescrip" class="form-control" />
-                    <span asp-validation-for="MascotaDescrip" class="text-danger"></span>
-                </div>
-
-                <div class="mb-3">
-                    <label asp-for="MascotaEdad" class="form-label">Edad</label>
-                    <input type="text" asp-for="MascotaEdad" class="form-control" />
-                    <span asp-validation-for="MascotaEdad" class="text-danger"></span>
-                </div>
-
-
-                <span class="text-danger">@ViewBag.Error</span>
-
-                <div class="modal-footer">
-                    <a type="button" class="btn btn-secondary" asp-controller="Client" asp-action="Index">Cerrar</a>
-                    <button type="submit" class="btn btn-primary">Agregar</button>
-                </div>
-
-            </form>
-        </div>
+        <label asp-for="CantComplementoAlimientoCastrado"><b>Complemento dietario extra</b></label>
+        <input type="text" asp-for="CantComplementoAlimientoCastrado" required>
+        <span asp-validation-for="CantComplementoAlimientoCastrado" class="text-danger"></span>
 
     </div>
-</div>
+
+    <div class="container btnContainer" style="background-color:#f1f1f1">
+        <button type="submit">Pedir</button>
+        <a asp-action="Index" asp-controller="Client">Cancel</a>
+    </div>
+</form>
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 

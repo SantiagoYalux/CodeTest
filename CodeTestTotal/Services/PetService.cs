@@ -45,5 +45,12 @@ namespace CodeTestTotal.Services
 
             return value;
         }
+
+        public Mascota GetPetByID(int MascotaID)
+        {
+            var mascotas = _DbContext.Mascotas;
+
+            return mascotas.FirstOrDefault(x => x.MascotaID == MascotaID);
+        }
     }
 }

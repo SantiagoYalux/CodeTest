@@ -1,1 +1,46 @@
-[{"MascotaID":1,"MascotaNombre":"Larry","MascotaTipo":"P","MascotaImg":"Larry.jpg","MascotaDescrip":"\u00C9sta es la descripci\u00F3n de la primera mascota","MascotaEdad":5,"MascotaPeso":25,"MascotaCastrado":true,"MascotaClientID":1},{"MascotaID":2,"MascotaNombre":"DonGato","MascotaTipo":"G","MascotaImg":"DonGato.jpg","MascotaDescrip":"\u00C9sta es la descripci\u00F3n de la segunda mascota","MascotaEdad":2,"MascotaPeso":50,"MascotaCastrado":false,"MascotaClientID":1},{"MascotaID":2,"MascotaNombre":"Pep","MascotaTipo":"P","MascotaImg":null,"MascotaDescrip":"aa","MascotaEdad":2,"MascotaPeso":50,"MascotaCastrado":true,"MascotaClientID":1},{"MascotaID":2,"MascotaNombre":"Pep","MascotaTipo":"P","MascotaImg":null,"MascotaDescrip":"aa","MascotaEdad":2,"MascotaPeso":50,"MascotaCastrado":true,"MascotaClientID":1}]
+[
+  {
+    "MascotaID": 1,
+    "MascotaNombre": "Larry",
+    "MascotaTipo": "P",
+    "MascotaImg": "Larry.jpg",
+    "MascotaDescrip": "\u00C9sta es la descripci\u00F3n de la primera mascota",
+    "MascotaEdad": 15,
+    "MascotaPeso": 25,
+    "MascotaCastrado": true,
+    "MascotaClientID": 1
+  },
+  {
+    "MascotaID": 2,
+    "MascotaNombre": "DonGato",
+    "MascotaTipo": "G",
+    "MascotaImg": "DonGato.jpg",
+    "MascotaDescrip": "\u00C9sta es la descripci\u00F3n de la segunda mascota",
+    "MascotaEdad": 2,
+    "MascotaPeso": 50,
+    "MascotaCastrado": false,
+    "MascotaClientID": 1
+  },
+  {
+    "MascotaID": 2,
+    "MascotaNombre": "Pep",
+    "MascotaTipo": "P",
+    "MascotaImg": null,
+    "MascotaDescrip": "aa",
+    "MascotaEdad": 2,
+    "MascotaPeso": 50,
+    "MascotaCastrado": true,
+    "MascotaClientID": 1
+  },
+  {
+    "MascotaID": 2,
+    "MascotaNombre": "Pep",
+    "MascotaTipo": "P",
+    "MascotaImg": null,
+    "MascotaDescrip": "aa",
+    "MascotaEdad": 2,
+    "MascotaPeso": 50,
+    "MascotaCastrado": true,
+    "MascotaClientID": 1
+  }
+]

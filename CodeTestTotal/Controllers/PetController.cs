@@ -28,7 +28,7 @@ namespace CodeTestTotal.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddPetAsync(AddPetViewModel NewPet)
+        public async Task<ActionResult> AddPetAsync(AddPetViewModel NewPet)
         {
 
             if (!ModelState.IsValid)
@@ -46,16 +46,13 @@ namespace CodeTestTotal.Controllers
                 return View(NewPet);
             }
 
-
             if (await _IPetService.AddNewPetAsync(NewPet, 1))
             {
-                RedirectToAction("Index", "Client");
+                return RedirectToAction("Index", "Client");
             }
-            else
-            {
-                ModelState.AddModelError(string.Empty, "Error al generar mascota");
-                return View(NewPet);
-            }
+
+            ModelState.AddModelError(string.Empty, "Error al generar mascota");
+            return View(NewPet);
 
         }
     }

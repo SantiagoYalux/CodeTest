@@ -10,6 +10,7 @@ builder.Services.AddSingleton<DBContext>();
 builder.Services.AddSingleton<IUserService, UserService>();
 builder.Services.AddSingleton<IClientService, ClientService>();
 builder.Services.AddSingleton<IPetService, PetService>();
+builder.Services.AddSingleton<IOrdenService, OrderService>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

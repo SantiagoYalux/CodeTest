@@ -11,18 +11,21 @@ namespace CodeTestTotal.Models
         public List<Cliente> Clientes { get; set; }
         public List<Mascota> Mascotas { get; set; }
         public List<Vendedor> Vendedores { get; set; }
+        public List<Pedido> Pedidos { get; set; }
 
         /*Jsons files Paths*/
         private string MascotasJsonPath = "C:\\Users\\yalux\\source\\repos\\WEB CORE\\CodeTestTotal\\CodeTestTotal\\DataContent\\Mascotas.json";
         private string UsuariosJsonPath = "C:\\Users\\yalux\\source\\repos\\WEB CORE\\CodeTestTotal\\CodeTestTotal\\DataContent\\Usuarios.json";
         private string ClientesJsonPath = "C:\\Users\\yalux\\source\\repos\\WEB CORE\\CodeTestTotal\\CodeTestTotal\\DataContent\\Clientes.json";
         private string VendedoresJsonPath = "C:\\Users\\yalux\\source\\repos\\WEB CORE\\CodeTestTotal\\CodeTestTotal\\DataContent\\Vendedores.json";
+        private string PedidosJsonPath = "C:\\Users\\yalux\\source\\repos\\WEB CORE\\CodeTestTotal\\CodeTestTotal\\DataContent\\Pedidos.json";
 
         public DBContext()
         {
             FillUsuarios();
             FillClientes();
             FillMascotas();
+            FillPedidos();
         }
 
         private async void FillUsuarios()
@@ -51,6 +54,15 @@ namespace CodeTestTotal.Models
 
             /*deserialize the content and assign to the User list*/
             Mascotas = JsonSerializer.Deserialize<List<Mascota>>(context);
+        }
+        private async void FillPedidos()
+        {
+
+            /*Get context from Usuarios json file*/
+            string context = await File.ReadAllTextAsync(PedidosJsonPath);
+
+            /*deserialize the content and assign to the User list*/
+            Pedidos = JsonSerializer.Deserialize<List<Pedido>>(context);
         }
         private async void FillVendedores()
         {
@@ -97,6 +109,13 @@ namespace CodeTestTotal.Models
                     var JsonClientes = JsonSerializer.Serialize(Clientes);
 
                     System.IO.File.WriteAllText(ClientesJsonPath, JsonClientes);
+                    resultado = true;
+                    break;
+                case "Pedido":
+                    Pedidos.Add((Pedido)newObject);
+                    var JsonPedidos = JsonSerializer.Serialize(Pedidos);
+
+                    System.IO.File.WriteAllText(PedidosJsonPath, JsonPedidos);
                     resultado = true;
                     break;
 
