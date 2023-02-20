@@ -8,6 +8,8 @@
         public string MascotaImg { get; set; }
         public string MascotaDescrip { get; set; }
         public int MascotaEdad { get; set; }
+        public int MascotaPeso { get; set; }
+        public bool MascotaCastrado { get; set; }
         public int MascotaClientID { get; set; }
     }
 }

@@ -21,7 +21,7 @@ namespace CodeTestTotal.Services
         }
 
         public async Task<bool> AddNewPetAsync(AddPetViewModel AddPetViewModel, int clientID)
-         {
+        {
             bool value = false;
             var LastID = 1;
 
@@ -30,6 +30,13 @@ namespace CodeTestTotal.Services
             oNewMascota.MascotaNombre = AddPetViewModel.MascotaNombre;
             oNewMascota.MascotaClientID = clientID;
             oNewMascota.MascotaEdad = AddPetViewModel.MascotaEdad;
+            oNewMascota.MascotaPeso = AddPetViewModel.MascotaPeso;
+            
+            if (AddPetViewModel.MascotaCastrado == "Si")
+                oNewMascota.MascotaCastrado = true;
+            else
+                oNewMascota.MascotaCastrado = false;
+
             oNewMascota.MascotaImg = AddPetViewModel.MascotaImg;
             oNewMascota.MascotaTipo = AddPetViewModel.MascotaTipo;
             oNewMascota.MascotaDescrip = AddPetViewModel.MascotaDescrip;

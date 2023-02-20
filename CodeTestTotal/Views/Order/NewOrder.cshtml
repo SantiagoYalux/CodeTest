@@ -26,12 +26,6 @@
                     <span asp-validation-for="MascotaTipo" class="text-danger"></span>
                 </div>
 
-                <div>
-                    <label asp-for="MascotaCastrado" class="form-label">Castrado</label>
-                    @Html.DropDownListFor(x=>x.MascotaCastrado, (IEnumerable<SelectListItem>)ViewBag.OpcionesCastrado)
-                    <span asp-validation-for="MascotaCastrado" class="text-danger"></span>
-                </div>
-
                 <div class="mb-3">
                     <label asp-for="MascotaImg" class="form-label">Imagen:</label>
                     <input asp-for="MascotaImg" type="file" class="form-control" />
@@ -47,11 +41,6 @@
                     <label asp-for="MascotaEdad" class="form-label">Edad</label>
                     <input type="text" asp-for="MascotaEdad" class="form-control" />
                     <span asp-validation-for="MascotaEdad" class="text-danger"></span>
-                </div>
-                <div class="mb-3">
-                    <label asp-for="MascotaPeso" class="form-label">Peso</label>
-                    <input type="text" asp-for="MascotaPeso" class="form-control" />
-                    <span asp-validation-for="MascotaPeso" class="text-danger"></span>
                 </div>
 
 
