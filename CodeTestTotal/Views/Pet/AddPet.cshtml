@@ -1,0 +1,59 @@
+﻿@using CodeTestTotal.ViewModel;
+@model AddPetViewModel
+
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Nueva mascota</h5>
+        </div>
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+        <div class="modal-body">
+            <form asp-controller="Pet" asp-action="AddPet" enctype="multipart/form-data">
+
+                <div class="mb-3">
+                    <label asp-for="MascotaNombre" class="form-label">Nombre</label>
+                    <input type="text" asp-for="MascotaNombre" class="form-control" />
+                    <span asp-validation-for="MascotaNombre" class="text-danger"></span>
+                </div>
+
+                <div>
+                    <label asp-for="MascotaTipo" class="form-label">Tipo</label>
+                    @Html.DropDownListFor(x=>x.MascotaTipo, (IEnumerable<SelectListItem>)ViewBag.OpcionesTipoMascota)
+                    <span asp-validation-for="MascotaTipo" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="MascotaImg" class="form-label">Imagen:</label>
+                    <input asp-for="MascotaImg" type="file" class="form-control" />
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="MascotaDescrip" class="form-label">Descripción</label>
+                    <input type="text" asp-for="MascotaDescrip" class="form-control" />
+                    <span asp-validation-for="MascotaDescrip" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="MascotaEdad" class="form-label">Edad</label>
+                    <input type="text" asp-for="MascotaEdad" class="form-control" />
+                    <span asp-validation-for="MascotaEdad" class="text-danger"></span>
+                </div>
+
+
+                <span class="text-danger">@ViewBag.Error</span>
+
+                <div class="modal-footer">
+                    <a type="button" class="btn btn-secondary" asp-controller="Client" asp-action="Index">Cerrar</a>
+                    <button type="submit" class="btn btn-primary">Agregar</button>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+

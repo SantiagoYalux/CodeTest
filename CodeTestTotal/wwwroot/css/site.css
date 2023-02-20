@@ -83,7 +83,8 @@ body {
 }
 
 .Mascota_foto {
-    width: 13em;
+    width: 180px;
+    height: 140px;
     border-radius:1em;
     border:1px double black;
 }
@@ -118,5 +119,15 @@ body {
     margin-top: .2em;
     text-align: center;
     border-radius: 10em;
+}
+
+.AgregarMascota {
+    position: absolute;
+    bottom: 5em;
+    right: 5em;
+    border: 1px solid black;
+    border-radius: 2em;
+    padding: 1em;
+    background-color: rgb(90, 198, 90);
 }
 /*END*/

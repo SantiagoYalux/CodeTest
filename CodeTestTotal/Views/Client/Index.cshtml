@@ -10,8 +10,26 @@
         <article class="Mascota">
             <h2>@item.MascotaNombre</h2>
             <div class="Mascota_imagenes">
-                <img src="/Images/@item.MascotaImg" alt="@item.MascotaNombre" title="@item.MascotaNombre" class="Mascota_foto">
-                @if(item.MascotaTipo == "P")
+
+                @if (@item.MascotaImg != null)
+                {
+                    <img src="/Images/@item.MascotaImg" alt="@item.MascotaNombre" title="@item.MascotaNombre" class="Mascota_foto">
+                }
+                else
+                {
+
+                    @if (@item.MascotaTipo == "P")
+                    {
+                        <img src="/Images/perroDefault.png" alt="@item.MascotaNombre" title="@item.MascotaNombre" class="Mascota_foto">
+                    }
+                    else
+                    {
+                        <img src="/Images/GatoDefault.png" alt="@item.MascotaNombre" title="@item.MascotaNombre" class="Mascota_foto">
+                    }
+
+                }
+
+                @if (item.MascotaTipo == "P")
                 {
                     <img src="/Images/perro.png" class="mascota_tipo">
                 }
@@ -27,3 +45,6 @@
 
 </section>
 
+<a asp-controller="Pet" asp-action="AddPet">
+    <img src="/Images/AddMascota.png" class="AgregarMascota">
+</a>
