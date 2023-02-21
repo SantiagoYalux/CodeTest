@@ -129,5 +129,75 @@ namespace CodeTestTotal.Models
             return await Task.FromResult(resultado);
         }
 
+        public async Task<bool> ModRegister(object newObject)
+        {
+            /**/
+            bool resultado = false;
+            var type = newObject.GetType();
+
+            switch (type.Name)
+            {
+                case "Mascota":
+                    /*Remove the register*/
+                    Mascotas.RemoveAll(x => x.MascotaID == ((Mascota)newObject).MascotaID);
+
+                    /*Add the Mod register*/
+                    Mascotas.Add((Mascota)newObject);
+                    var JsonMascotas = JsonSerializer.Serialize(Mascotas);
+
+                    System.IO.File.WriteAllText(MascotasJsonPath, JsonMascotas);
+                    resultado = true;
+                    break;
+                case "Usuario":
+                    /*Remove the register*/
+                    Usuarios.RemoveAll(x => x.UsuarioId == ((Usuario)newObject).UsuarioId);
+
+                    /*Add the Mod register*/
+                    Usuarios.Add((Usuario)newObject);
+                    var JsonUsuarios = JsonSerializer.Serialize(Usuarios);
+
+                    System.IO.File.WriteAllText(UsuariosJsonPath, JsonUsuarios);
+                    resultado = true;
+                    break;
+                case "Vendedor":
+                    /*Remove the register*/
+
+                    /*Add the Mod register*/
+                    Vendedores.Add((Vendedor)newObject);
+                    var JsonVendedores = JsonSerializer.Serialize(Vendedores);
+
+                    System.IO.File.WriteAllText(VendedoresJsonPath, JsonVendedores);
+                    resultado = true;
+                    break;
+                case "Cliente":
+                    /*Remove the register*/
+                    //Clientes.RemoveAll(x => x.ClienteID == ((Cliente)newObject));
+
+                    /*Add the Mod register*/
+                    Clientes.Add((Cliente)newObject);
+                    var JsonClientes = JsonSerializer.Serialize(Clientes);
+
+                    System.IO.File.WriteAllText(ClientesJsonPath, JsonClientes);
+                    resultado = true;
+                    break;
+                case "Pedido":
+                    /*Remove the register*/
+                    Pedidos.RemoveAll(x => x.PedidoID == ((Pedido)newObject).PedidoID);
+
+                    /*Add the Mod register*/
+                    Pedidos.Add((Pedido)newObject);
+                    var JsonPedidos = JsonSerializer.Serialize(Pedidos);
+
+                    System.IO.File.WriteAllText(PedidosJsonPath, JsonPedidos);
+                    resultado = true;
+                    break;
+
+                default:
+                    break;
+            }
+
+            return await Task.FromResult(resultado);
+        }
+
     }
 }

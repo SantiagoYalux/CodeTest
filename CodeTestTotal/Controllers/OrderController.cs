@@ -10,10 +10,12 @@ namespace CodeTestTotal.Controllers
     {
         private readonly IOrdenService _IOrdenService;
         private readonly IPetService _IPetService;
-        public OrderController(IOrdenService IOrdenService, IPetService IPetService)
+        private readonly IClientService _IClientService;
+        public OrderController(IOrdenService IOrdenService, IPetService IPetService, IClientService IClientService)
         {
             _IOrdenService = IOrdenService;
             _IPetService = IPetService;
+            _IClientService = IClientService;
         }
 
         public IActionResult NewOrder(int mascotaID, string nameMascota)
@@ -122,6 +124,52 @@ namespace CodeTestTotal.Controllers
 
             return View(Model);
         }
+
+        public async Task<ActionResult> ListOrders()
+        {
+            /*Get order history*/
+            var orders = await _IOrdenService.GetAllOrders();
+
+            List<ListOrdersViewModel> Model = new List<ListOrdersViewModel>();
+
+            foreach (var oItem in orders)
+            {
+                //For each order... we get the pet and client
+                ListOrdersViewModel oListOrdersViewModel = new ListOrdersViewModel();
+
+                var oPet = _IPetService.GetPetByID(oItem.PedidoMascotaID);
+                var client = _IClientService.GetClient(oPet.MascotaClientID);
+
+                oListOrdersViewModel.PedidoID = oItem.PedidoID;
+                oListOrdersViewModel.MascotaNombre = oPet.MascotaNombre;
+                oListOrdersViewModel.ClienteNombre = client.ClienteNombre;
+                oListOrdersViewModel.PedidoFecha = oItem.PedidoFecha;
+                oListOrdersViewModel.PedidoFechaDespachado = oItem.PedidoFechaDespachado;
+                oListOrdersViewModel.PedidoVendedorID = oItem.PedidoVendedorID;
+                oListOrdersViewModel.PedidoVendedorNombre = oItem.PedidoVendedorNombre;
+
+                Model.Add(oListOrdersViewModel);
+            }
+
+            return View(Model);
+        }
+
+        public async Task<ActionResult> MarkAsDespachado([FromBody]int PedidoID)
+        {
+            if(PedidoID <= 0)
+            {
+                return View();
+            }
+
+            var result = await _IOrdenService.MaskAsDespachado(PedidoID);
+
+            if (result)
+                return RedirectToAction("ListOrders", "Order");
+            
+            return View();
+        }
+
+
 
     }
 }

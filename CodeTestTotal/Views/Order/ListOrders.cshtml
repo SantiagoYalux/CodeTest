@@ -1,0 +1,93 @@
+﻿@using CodeTestTotal.ViewModel;
+@model List<ListOrdersViewModel>
+
+
+<table class="table table-striped table-light table-bordered align-middle caption-top display" id="TablaWiewPurchaseOrder">
+    <caption class="captionTable" id="CantVentas">Ventas : @Model.ToList().Count</caption>
+    <thead>
+        <tr class="centrarColumna">
+            <th scope="col">Cliente</th>
+            <th scope="col">Mascota</th>
+            <th scope="col">Fecha pedido</th>
+            <th scope="col">Fecha Despachado</th>
+            <th scope="col">Vendedor</th>
+            <th scope="col">Pedido</th>
+            <th scope="col">Despachar</th>
+        </tr>
+    </thead>
+    <tbody id="tbodyPurchase">
+
+        @foreach (var oPurchaseOrder in Model.ToList())
+        {
+            <tr class="centrarColumna">
+                <td scope="row">@oPurchaseOrder.ClienteNombre</td>
+                <td>@oPurchaseOrder.MascotaNombre</td>
+                <td>@oPurchaseOrder.PedidoFecha</td>
+                <td>@oPurchaseOrder.PedidoFechaDespachado</td>
+                <td>@oPurchaseOrder.PedidoVendedorNombre</td>
+
+                <td>
+                    <button class="btn btn-primary btnAbrirOffScrolling" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling"
+                        aria-controls="offcanvasScrolling" onclick="ShowOrder(@oPurchaseOrder.PedidoID)">
+                        Info
+                    </button>
+                </td>
+
+                @if (@oPurchaseOrder.PedidoFechaDespachado == null)
+                {
+                    <td>
+                        <button class="btn btn-primary btnAbrirOffScrolling" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling"
+                        aria-controls="offcanvasScrolling" onclick="MaskAsDespachado(@oPurchaseOrder.PedidoID)">
+                            Despachar
+                        </button>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                    </td>
+                }
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js" defer></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+<script>
+    var url = '@Url.Action("MarkAsDespachado","Order")';
+    /*DataTable api*/
+    $(document).ready(function () {
+        $('#TablaWiewPurchaseOrder').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+            },
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ],
+            /*order by order date*/
+            "order": [[2, "desc"]]
+        }); /* ID DE TABLE */
+    });
+
+    async function MaskAsDespachado(PedidoID) {
+        var data = JSON.stringify(PedidoID)
+
+        await fetch(url, {
+            method: 'POST',
+            body: data,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+    }
+
+    function ShowOrder(PedidoID) {
+
+    }
+</script>

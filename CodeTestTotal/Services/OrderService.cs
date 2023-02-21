@@ -42,7 +42,31 @@ namespace CodeTestTotal.Services
         {
             var Pedidos = _DbContext.Pedidos;
 
-            return Pedidos.Where(x => x.PedidoMascotaID == mascotaID).OrderByDescending(x=>x.PedidoFecha).ToList();
+            return Pedidos.Where(x => x.PedidoMascotaID == mascotaID).OrderByDescending(x => x.PedidoFecha).ToList();
+        }
+        public async Task<List<Pedido>> GetAllOrders()
+        {
+            var Pedidos = _DbContext.Pedidos;
+
+            return Pedidos;
+        }
+
+        public async Task<bool> MaskAsDespachado(int PedidoID)
+        {
+            bool result = false;
+
+            var pedido = _DbContext.Pedidos.FirstOrDefault(x => x.PedidoID == PedidoID);
+
+            if (pedido != null)
+            {
+                pedido.PedidoFechaDespachado = DateTime.Now;
+                pedido.PedidoDespachado = true;
+                pedido.PedidoVendedorID = 1;
+                pedido.PedidoVendedorNombre = "Santiago";
+                result = await _DbContext.ModRegister(pedido);
+            }
+
+            return result;
         }
 
         //public async Task<int> GetCountOrderByClientID(int clientID)
