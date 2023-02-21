@@ -42,7 +42,7 @@ namespace CodeTestTotal.Services
         {
             var Pedidos = _DbContext.Pedidos;
 
-            return Pedidos.Where(x => x.PedidoMascotaID == mascotaID).ToList();
+            return Pedidos.Where(x => x.PedidoMascotaID == mascotaID).OrderByDescending(x=>x.PedidoFecha).ToList();
         }
     }
 }
