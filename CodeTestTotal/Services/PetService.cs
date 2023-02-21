@@ -13,7 +13,7 @@ namespace CodeTestTotal.Services
             _DbContext = DbContext;
         }
 
-        public List<Mascota> GetClientsPets(int clientID)
+        public List<Mascota> GetClientPets(int clientID)
         {
             var mascotas = _DbContext.Mascotas;
 
@@ -51,6 +51,13 @@ namespace CodeTestTotal.Services
             var mascotas = _DbContext.Mascotas;
 
             return mascotas.FirstOrDefault(x => x.MascotaID == MascotaID);
+        }
+
+        public List<Mascota> GetAllPets()
+        {
+            var mascotas = _DbContext.Mascotas;
+
+            return mascotas;
         }
     }
 }

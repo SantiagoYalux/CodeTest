@@ -41,6 +41,17 @@
     "MascotaEdad": 2,
     "MascotaPeso": 50,
     "MascotaCastrado": true,
-    "MascotaClientID": 1
+    "MascotaClientID": 2
+  },
+  {
+    "MascotaID": 2,
+    "MascotaNombre": "Jony",
+    "MascotaTipo": "P",
+    "MascotaImg": null,
+    "MascotaDescrip": "aa",
+    "MascotaEdad": 2,
+    "MascotaPeso": 50,
+    "MascotaCastrado": true,
+    "MascotaClientID": 2
   }
 ]

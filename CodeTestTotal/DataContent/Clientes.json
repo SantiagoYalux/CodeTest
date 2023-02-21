@@ -2,6 +2,16 @@
   {
     "ClienteID": 1,
     "ClienteNombre": "Santiago",
-    "ClienteUsuarioID":  1
+    "ClienteUsuarioID": 1
+  },
+  {
+    "ClienteID": 2,
+    "ClienteNombre": "Sergio",
+    "ClienteUsuarioID": 2
+  },
+  {
+    "ClienteID": 3,
+    "ClienteNombre": "Junjo",
+    "ClienteUsuarioID": 5
   }
 ]

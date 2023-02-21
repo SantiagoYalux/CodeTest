@@ -44,5 +44,11 @@ namespace CodeTestTotal.Services
 
             return Pedidos.Where(x => x.PedidoMascotaID == mascotaID).OrderByDescending(x=>x.PedidoFecha).ToList();
         }
+
+        //public async Task<int> GetCountOrderByClientID(int clientID)
+        //{
+        //    var Pedidos = _DbContext.Pedidos;
+
+        //}
     }
 }
