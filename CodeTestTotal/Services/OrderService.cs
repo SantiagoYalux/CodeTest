@@ -37,5 +37,12 @@ namespace CodeTestTotal.Services
 
             return result;
         }
+
+        public async Task<List<Pedido>> GetPetsOrders(int mascotaID)
+        {
+            var Pedidos = _DbContext.Pedidos;
+
+            return Pedidos.Where(x => x.PedidoMascotaID == mascotaID).ToList();
+        }
     }
 }

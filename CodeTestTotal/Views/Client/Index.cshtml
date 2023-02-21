@@ -41,7 +41,7 @@
             </div>
             <a href="" class="btnInfo">Información</a>
             <a class="btnInfo" asp-action="NewOrder" asp-controller="Order" asp-route-mascotaID="@item.MascotaID" asp-route-nameMascota="@item.MascotaNombre" id="btnOpenModalNewOrder">Pedido</a>
-
+            <a class="btnInfo" asp-action="MyOrders" asp-controller="Order" asp-route-mascotaID="@item.MascotaID" asp-route-nameMascota="@item.MascotaNombre" asp-route-mascotaTipo="@item.MascotaTipo" id="btnOpenModalNewOrder">Historial</a>
         </article>
     }
 

@@ -11,5 +11,6 @@
         public bool? PedidoDespachado { get; set; }
         public DateTime? PedidoFechaDespachado { get; set; }
         public int? PedidoVendedorID { get; set; }
+        public string? PedidoVendedorNombre { get; set; }
     }
 }

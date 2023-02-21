@@ -1,0 +1,28 @@
+﻿@using CodeTestTotal.ViewModel;
+@model List<MyOrdersViewModel>
+
+<section class="OrderList">
+    <h2>Pedidos @Model.First().PetName</h2>
+
+    @foreach (MyOrdersViewModel oItem in Model)
+    {
+        <article class="OrderListItem">
+            <div class="imgDiv">
+                <img src="/Images/@oItem.PetFoodImage" class="petImg">
+
+            </div>
+
+            <div class="OrderData">
+                <p>@oItem.OrderMessage</p>
+            </div>
+
+            <div class="OrderDespachadoData">
+                <p class="dataDespacho">Despachado</p>
+                <img src="/Images/@oItem.PetOrderProgressImage" alt="">
+            </div>
+        </article>
+
+    }
+
+    <a class="" asp-action="Index" asp-controller="Client">Salir</a>
+</section>

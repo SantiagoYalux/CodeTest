@@ -275,3 +275,58 @@ body {
     }
 }*/
 /*ENNNND*/
+
+
+/*CSS "MY ORDERS" */
+.OrderListItem {
+    display: flex;
+    flex-direction: row;
+    width: 30%;
+    margin: 0 auto;
+    border: 1px double black;
+    border-radius: 1em;
+    margin-top: 1em;
+    padding: .5em;
+    align-items: center;
+    justify-content: center;
+}
+
+.OrderList h2 {
+    text-align: center;
+}
+
+.petImg {
+    width: 5em;
+    border: 1px double black;
+    border-radius: 5em;
+}
+
+.OrderData {
+    width: 100%;
+    display: flex;
+}
+
+    .OrderData p {
+        margin-left: 1em;
+        font-size: 1em;
+    }
+
+.OrderDespachadoData p:first-child {
+    margin-bottom: .5em;
+    font-weight: bold;
+}
+
+.OrderDespachadoData {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+    .OrderDespachadoData img {
+        width: 2em;
+    }
+
+.dataDespacho {
+    margin: 0;
+}
+/*END*/

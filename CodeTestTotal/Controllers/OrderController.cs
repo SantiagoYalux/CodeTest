@@ -87,5 +87,41 @@ namespace CodeTestTotal.Controllers
             ModelState.AddModelError("", "Errores al intentar agregar la orden");
             return View(oNewOrdenViewModel);
         }
+
+        public async Task<ActionResult> MyOrders(int mascotaID, string nameMascota, string mascotaTipo)
+        {
+            List<MyOrdersViewModel> Model = new List<MyOrdersViewModel>();
+
+            var orders = await _IOrdenService.GetPetsOrders(mascotaID);
+
+            string foodImage = "";
+            if (mascotaTipo == "P")
+                foodImage = "ComidaPerro.png";
+            else
+                foodImage = "ComidaGato.png";
+
+            foreach (var order in orders)
+            {
+                MyOrdersViewModel itemModel = new MyOrdersViewModel();
+                itemModel.PetName = nameMascota;
+
+                itemModel.PetFoodImage = foodImage;
+
+                if (order.PedidoVendedorID != null)
+                {
+                    itemModel.OrderMessage = $"El pedido para Don Gato fue despachado con éxito a las {order.PedidoFechaDespachado} por el vendedor {order.PedidoVendedorNombre}";
+                    itemModel.PetOrderProgressImage = "Despachado.png";
+                }
+                else
+                {
+                    itemModel.OrderMessage = "El pedido para Don Gato no fue despachado";
+                    itemModel.PetOrderProgressImage = "NoDespachado.png";
+                }
+                Model.Add(itemModel);
+            }
+
+            return View(Model);
+        }
+
     }
 }
