@@ -4,58 +4,60 @@
 <!-- The Modal -->
 <!-- Modal Content -->
 
-<h2 style="text-align:center;">Combo para @Model.MascotaNombre</h2>
+<section class="sectionNewOrder">
 
-<section class="PetData">
+    <h2 style="text-align:center;">Combo para @Model.MascotaNombre</h2>
+    <section class="PetData">
 
-    <div>
-        <p>Peso</p>
-        <p>
-            @Model.MascotaPeso kg
-        </p>
-    </div>
-    
-    <div>
-        <p>Edad</p>
-        <p>
-            @Model.MascotaEdad años
-        </p>
-    </div>
-    <div>
-        <p>Castrado</p>
-        @if(@Model.MascotaCastrado)
-        {
-            <p>SI</p>
-        }
-        else
-        {
-            <p>NO</p>
-        }
-    </div>
+        <div>
+            <p>Peso</p>
+            <p>
+                @Model.MascotaPeso kg
+            </p>
+        </div>
+
+        <div>
+            <p>Edad</p>
+            <p>
+                @Model.MascotaEdad años
+            </p>
+        </div>
+        <div>
+            <p>Castrado</p>
+            @if (@Model.MascotaCastrado)
+            {
+                <p>SI</p>
+            }
+            else
+            {
+                <p>NO</p>
+            }
+        </div>
+    </section>
+    <form class="modal-content animate formNewOrder" asp-action="NewOrder" enctype="multipart/form-data">
+
+        <div class="container formContent">
+            <input asp-for="MascotaID" type="text" hidden />
+
+            <label asp-for="CantidadAlimiento"><b>Alimiento</b></label>
+            <input type="text" asp-for="CantidadAlimiento" required>
+            <span asp-validation-for="CantidadAlimiento" class="text-danger"></span>
+
+            <label asp-for="CantComplementoAlimientoEdad"><b>Complemento dietario</b></label>
+            <input type="text" asp-for="CantComplementoAlimientoEdad" required>
+            <span asp-validation-for="CantComplementoAlimientoEdad" class="text-danger"></span>
+
+            <label asp-for="CantComplementoAlimientoCastrado"><b>Complemento dietario extra</b></label>
+            <input type="text" asp-for="CantComplementoAlimientoCastrado" required>
+            <span asp-validation-for="CantComplementoAlimientoCastrado" class="text-danger"></span>
+
+        </div>
+
+        <div class="container btnContainer" style="background-color:#f1f1f1">
+            <button type="submit">Pedir</button>
+            <a asp-action="Index" asp-controller="Client">Cancel</a>
+        </div>
+    </form>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 </section>
-<form class="modal-content animate formNewOrder" asp-action="NewOrder" enctype="multipart/form-data">
-
-    <div class="container formContent">
-        <input asp-for="MascotaID" type="text" hidden/>
-        
-        <label asp-for="CantidadAlimiento"><b>Alimiento</b></label>
-        <input type="text" asp-for="CantidadAlimiento" required >
-        <span asp-validation-for="CantidadAlimiento" class="text-danger"></span>
-
-        <label asp-for="CantComplementoAlimientoEdad"><b>Complemento dietario</b></label>
-        <input type="text" asp-for="CantComplementoAlimientoEdad" required>
-        <span asp-validation-for="CantComplementoAlimientoEdad" class="text-danger"></span>
-
-        <label asp-for="CantComplementoAlimientoCastrado"><b>Complemento dietario extra</b></label>
-        <input type="text" asp-for="CantComplementoAlimientoCastrado" required>
-        <span asp-validation-for="CantComplementoAlimientoCastrado" class="text-danger"></span>
-
-    </div>
-
-    <div class="container btnContainer" style="background-color:#f1f1f1">
-        <button type="submit">Pedir</button>
-        <a asp-action="Index" asp-controller="Client">Cancel</a>
-    </div>
-</form>
-<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 

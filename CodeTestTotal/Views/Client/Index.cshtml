@@ -3,6 +3,10 @@
     ViewData["Title"] = "Hola";
 }
 
+<div id="id01" class="modal">
+
+    <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">times;</span>
+</div>
 
 <section class="misMascotas">
 
@@ -40,8 +44,8 @@
                 }
             </div>
             <a href="" class="btnInfo">Información</a>
-            <a class="btnInfo" asp-action="NewOrder" asp-controller="Order" asp-route-mascotaID="@item.MascotaID" asp-route-nameMascota="@item.MascotaNombre" id="btnOpenModalNewOrder">Pedido</a>
-            <a class="btnInfo" asp-action="MyOrders" asp-controller="Order" asp-route-mascotaID="@item.MascotaID" asp-route-nameMascota="@item.MascotaNombre" asp-route-mascotaTipo="@item.MascotaTipo" id="btnOpenModalNewOrder">Historial</a>
+            <button class="btnInfo" onclick="AddNewOrder(@item.MascotaID, '@item.MascotaNombre')" id="btnOpenModalNewOrder">Pedido</button>
+            <button class="btnInfo" onclick="ShowOrders(@item.MascotaID, '@item.MascotaNombre', '@item.MascotaTipo' )" id="btnOpenModalNewOrder">Historial</button>
         </article>
     }
 
@@ -51,4 +55,36 @@
     <img src="/Images/AddMascota.png" class="AgregarMascota">
 </a>
 
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script>
+    var url = '@Url.Action("NewOrder","Order")';
+    var urlOrders = '@Url.Action("MyOrders","Order")';
+
+    function AddNewOrder(MascotaID, MascotaNombre) {
+        document.getElementById('id01').style.display = 'block'
+
+        $.get(url, { MascotaID: MascotaID, MascotaNombre: MascotaNombre }, llegadaDatos);
+    }
+
+    function ShowOrders(MascotaID, MascotaNombre, MascotaTipo) {
+        document.getElementById('id01').style.display = 'block'
+
+        $.get(urlOrders, { mascotaID: MascotaID, nameMascota: MascotaNombre, mascotaTipo: MascotaTipo }, llegadaDatos);
+    }
+
+    
+    function llegadaDatos(datos) {
+        document.getElementById("id01").innerHTML = datos;
+    }
+
+    // Get the modal
+    var modal = document.getElementById('id01');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
 

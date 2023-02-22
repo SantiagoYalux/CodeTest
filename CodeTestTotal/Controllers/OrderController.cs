@@ -18,7 +18,7 @@ namespace CodeTestTotal.Controllers
             _IClientService = IClientService;
         }
 
-        public IActionResult NewOrder(int mascotaID, string nameMascota)
+        public async Task<ActionResult> NewOrder(int mascotaID, string nameMascota)
         {
             /*Logic for pets combo*/
             /*Para gatos:
@@ -68,7 +68,7 @@ namespace CodeTestTotal.Controllers
             Model.MascotaEdad = pet.MascotaEdad;
             Model.MascotaCastrado = pet.MascotaCastrado;
 
-            return View(Model);
+            return PartialView(Model);
         }
 
         [HttpPost]
@@ -122,7 +122,7 @@ namespace CodeTestTotal.Controllers
                 Model.Add(itemModel);
             }
 
-            return View(Model);
+            return PartialView(Model);
         }
 
         public async Task<ActionResult> ListOrders(int vendedorID = 0)
