@@ -6,22 +6,22 @@ namespace CodeTestTotal.Models
 {
     public class DBContext
     {
-        /*In this Class, we are going to make all the necessary functions to handle our json files (Data files) */
-        public List<Usuario> Usuarios { get; set; }
-        public List<Cliente> Clientes { get; set; }
-        public List<Mascota> Mascotas { get; set; }
-        public List<Vendedor> Vendedores { get; set; }
-        public List<Pedido> Pedidos { get; set; }
-
-        /*Jsons files Paths*/
-        private string MascotasJsonPath = "C:\\Users\\yalux\\source\\repos\\WEB CORE\\CodeTestTotal\\CodeTestTotal\\DataContent\\Mascotas.json";
-        private string UsuariosJsonPath = "C:\\Users\\yalux\\source\\repos\\WEB CORE\\CodeTestTotal\\CodeTestTotal\\DataContent\\Usuarios.json";
-        private string ClientesJsonPath = "C:\\Users\\yalux\\source\\repos\\WEB CORE\\CodeTestTotal\\CodeTestTotal\\DataContent\\Clientes.json";
-        private string VendedoresJsonPath = "C:\\Users\\yalux\\source\\repos\\WEB CORE\\CodeTestTotal\\CodeTestTotal\\DataContent\\Vendedores.json";
-        private string PedidosJsonPath = "C:\\Users\\yalux\\source\\repos\\WEB CORE\\CodeTestTotal\\CodeTestTotal\\DataContent\\Pedidos.json";
-
-        public DBContext()
+        private readonly IWebHostEnvironment _IWebHostEnvironment;
+        private readonly string _AbsolutePath = "";
+        public DBContext(IWebHostEnvironment IWebHostEnvironment)
         {
+            /*we use IWebHostEnvironment to know where is hosted our app*/
+            _IWebHostEnvironment = IWebHostEnvironment;
+
+            //Get absolute path to the directory that contains the application content files
+            _AbsolutePath = _IWebHostEnvironment.ContentRootPath;
+
+            MascotasJsonPath = Path.Combine(_AbsolutePath.ToString(), "DataContent", "Mascotas.json");
+            UsuariosJsonPath = Path.Combine(_AbsolutePath.ToString(), "DataContent", "Usuarios.json");
+            ClientesJsonPath = Path.Combine(_AbsolutePath.ToString(), "DataContent", "Clientes.json");
+            VendedoresJsonPath = Path.Combine(_AbsolutePath.ToString(), "DataContent", "Vendedores.json");
+            PedidosJsonPath = Path.Combine(_AbsolutePath.ToString(), "DataContent", "Pedidos.json");
+
             FillUsuarios();
             FillClientes();
             FillMascotas();
@@ -29,13 +29,30 @@ namespace CodeTestTotal.Models
             FillVendedores();
         }
 
+        /*In this Class, we are going to make all the necessary functions to handle our json files (Data files) */
+        public List<Usuario> Usuarios { get; set; }
+        public List<Cliente> Clientes { get; set; }
+        public List<Mascota> Mascotas { get; set; }
+        public List<Vendedor> Vendedores { get; set; }
+        public List<Pedido> Pedidos { get; set; }
+
+        /*Json files Path*/
+        private string MascotasJsonPath = "";
+        private string UsuariosJsonPath = "";
+        private string ClientesJsonPath = "";
+        private string VendedoresJsonPath = "";
+        private string PedidosJsonPath = "";
+
         private async void FillUsuarios()
         {
             /*Get context from Usuarios json file*/
             string context = await File.ReadAllTextAsync(UsuariosJsonPath);
 
             /*deserialize the content and assign to the User list*/
-            Usuarios = JsonSerializer.Deserialize<List<Usuario>>(context);
+            if (context.Length > 0)
+                Usuarios = JsonSerializer.Deserialize<List<Usuario>>(context);
+            else
+                Usuarios = new List<Usuario>();
         }
         private async void FillClientes()
         {
@@ -44,7 +61,10 @@ namespace CodeTestTotal.Models
             string context = await File.ReadAllTextAsync(ClientesJsonPath);
 
             /*deserialize the content and assign to the User list*/
-            Clientes = JsonSerializer.Deserialize<List<Cliente>>(context);
+            if (context.Length > 0)
+                Clientes = JsonSerializer.Deserialize<List<Cliente>>(context);
+            else
+                Clientes = new List<Cliente>();
         }
 
         private async void FillMascotas()
@@ -54,7 +74,10 @@ namespace CodeTestTotal.Models
             string context = await File.ReadAllTextAsync(MascotasJsonPath);
 
             /*deserialize the content and assign to the User list*/
-            Mascotas = JsonSerializer.Deserialize<List<Mascota>>(context);
+            if (context.Length > 0)
+                Mascotas = JsonSerializer.Deserialize<List<Mascota>>(context);
+            else
+                Mascotas = new List<Mascota>();
         }
         private async void FillPedidos()
         {
@@ -75,7 +98,10 @@ namespace CodeTestTotal.Models
             string context = await File.ReadAllTextAsync(VendedoresJsonPath);
 
             /*deserialize the content and assign to the User list*/
-            Vendedores = JsonSerializer.Deserialize<List<Vendedor>>(context);
+            if (context.Length > 0)
+                Vendedores = JsonSerializer.Deserialize<List<Vendedor>>(context);
+            else
+                Vendedores = new List<Vendedor>();
         }
 
         public async Task<bool> AddNewRegister(object newObject)
@@ -191,6 +217,36 @@ namespace CodeTestTotal.Models
 
                     System.IO.File.WriteAllText(PedidosJsonPath, JsonPedidos);
                     resultado = true;
+                    break;
+
+                default:
+                    break;
+            }
+
+            return await Task.FromResult(resultado);
+        }
+
+        public async Task<int> GetLastId(object Object)
+        {
+            int resultado = 0;
+            var type = Object.GetType();
+
+            switch (type.Name)
+            {
+                case "Mascota":
+                    resultado = Mascotas.Max(x=> x.MascotaID);
+                    break;
+                case "Usuario":
+                    resultado = Usuarios.Max(x=> x.UsuarioId);
+                    break;
+                case "Vendedor":
+                    resultado = Vendedores.Max(x=> x.VendedorID);
+                    break;
+                case "Cliente":
+                    resultado = Clientes.Max(x=> x.ClienteID);
+                    break;
+                case "Pedido":
+                    resultado = Pedidos.Max(x=> x.PedidoID);
                     break;
 
                 default:
