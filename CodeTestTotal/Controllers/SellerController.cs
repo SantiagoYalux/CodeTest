@@ -8,10 +8,12 @@ namespace CodeTestTotal.Controllers
     {
         private readonly ISellerService _ISellerService;
         private readonly IOrdenService _IOrdenService;
-        public SellerController(ISellerService ISellerService, IOrdenService IOrdenService)
+        private readonly IUserService _IUserService;
+        public SellerController(ISellerService ISellerService, IOrdenService IOrdenService, IUserService iUserService)
         {
             _ISellerService = ISellerService;
             _IOrdenService = IOrdenService;
+            _IUserService = iUserService;
         }
         public async Task<ActionResult> ListSellers()
         {
@@ -38,6 +40,36 @@ namespace CodeTestTotal.Controllers
             }
 
             return View(Model);
+        }
+
+        public async Task<ActionResult> _AddSeller()
+        {
+            return PartialView();
+        }
+        [HttpPost]
+        public async Task<ActionResult> _AddSeller(AddSellerViewModel newSeller)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(newSeller);
+            }
+            /*If model is valid, add the new seller*/
+            //1- new user
+            var newUser = await _IUserService.AddUser(newSeller.VendedorUsername, newSeller.VendedorPassword);
+
+            if (newUser == 0)
+            {
+                ModelState.AddModelError("", "Problemas al agregar el usuario");
+                return View(newSeller);
+            }
+
+            //2- new seller
+            var result = await _ISellerService.AddNewSeller(newSeller,newUser);
+
+            if (result)
+                return RedirectToAction("ListSellers","Seller");
+
+            return View(newSeller);
         }
     }
 }

@@ -24,5 +24,18 @@ namespace CodeTestTotal.Services
 
             return Task.FromResult(false);
         }
+
+        public async Task<int> AddUser(string username, string password)
+        {
+            int result = 0;
+            Usuario newUser = new Usuario();
+            newUser.UsuarioId = 20;
+            newUser.UsuarioUsername = username;
+            newUser.UsuarioPassword = password;
+
+            bool resulta = await _dbContext.AddNewRegister(newUser);
+
+            return newUser.UsuarioId;
+        }
     }
 }

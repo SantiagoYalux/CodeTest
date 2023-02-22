@@ -1,0 +1,55 @@
+﻿@using CodeTestTotal.ViewModel;
+@model AddSellerViewModel
+
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Nuevo vendedor</h5>
+        </div>
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="modal-body">
+            <form asp-controller="Seller" asp-action="_AddSeller" enctype="multipart/form-data">
+
+                <div class="mb-3">
+                    <label asp-for="VendedorNombre" class="form-label">Nombre:</label>
+                    <input type="text" asp-for="VendedorNombre" class="form-control" />
+                    <span asp-validation-for="VendedorNombre" class="text-danger"></span>
+                </div>
+
+        @*        <div class="mb-3">
+                    <label asp-for="MascotaImg" class="form-label">Imagen:</label>
+                    <input asp-for="MascotaImg" type="file" class="form-control" />
+                </div>*@
+
+                <div class="mb-3">
+                    <label asp-for="VendedorApellido" class="form-label">Apellido:</label>
+                    <input type="text" asp-for="VendedorApellido" class="form-control" />
+                    <span asp-validation-for="VendedorApellido" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="VendedorFechaIncorporación" class="form-label">Fecha incorporación:</label>
+                    <input type="date" asp-for="VendedorFechaIncorporación" class="form-control" />
+                    <span asp-validation-for="VendedorFechaIncorporación" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="VendedorUsername" class="form-label">Username</label>
+                    <input type="text" asp-for="VendedorUsername" class="form-control" />
+                    <span asp-validation-for="VendedorUsername" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="VendedorPassword" class="form-label">Password</label>
+                    <input type="password" asp-for="VendedorPassword" class="form-control controls " />
+                    <span asp-validation-for="VendedorPassword" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Agregar</button>
+            </form>
+        </div>
+
+    </div>
+</div>

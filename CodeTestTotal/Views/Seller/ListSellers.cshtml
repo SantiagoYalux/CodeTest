@@ -1,6 +1,14 @@
 ﻿@using CodeTestTotal.ViewModel;
 @model List<ListSellersViewModel>
 
+<div id="id01" class="modal">
+
+    <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">times;</span>
+</div>
+<button class="d-flex btnAgregarProducto btn btn-success" onclick="AddNewSeller()" style="background-color:rgb(58, 125, 202 ); border-color:white;">
+    Agregar Vendedor
+</button>
+
 <section class="sectionListSellers">
 
     @foreach (var item in Model)
@@ -39,3 +47,29 @@
     }
 
 </section>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script>
+    var url = '@Url.Action("_AddSeller","Seller")';
+
+    function AddNewSeller() {
+        document.getElementById('id01').style.display = 'block'
+        
+
+        $.get(url,llegadaDatos);
+    }
+
+    function llegadaDatos(datos){
+        document.getElementById("id01").innerHTML = datos;
+    }
+
+    // Get the modal
+    var modal = document.getElementById('id01');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
