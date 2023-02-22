@@ -11,6 +11,7 @@ builder.Services.AddSingleton<IUserService, UserService>();
 builder.Services.AddSingleton<IClientService, ClientService>();
 builder.Services.AddSingleton<IPetService, PetService>();
 builder.Services.AddSingleton<IOrdenService, OrderService>();
+builder.Services.AddSingleton<ISellerService, SellerService>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

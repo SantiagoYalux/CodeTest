@@ -125,10 +125,13 @@ namespace CodeTestTotal.Controllers
             return View(Model);
         }
 
-        public async Task<ActionResult> ListOrders()
+        public async Task<ActionResult> ListOrders(int vendedorID = 0)
         {
             /*Get order history*/
             var orders = await _IOrdenService.GetAllOrders();
+
+            if (vendedorID != 0)
+                orders = orders.Where(x => x.PedidoVendedorID == vendedorID).ToList();
 
             List<ListOrdersViewModel> Model = new List<ListOrdersViewModel>();
 

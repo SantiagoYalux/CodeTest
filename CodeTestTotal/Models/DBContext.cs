@@ -26,6 +26,7 @@ namespace CodeTestTotal.Models
             FillClientes();
             FillMascotas();
             FillPedidos();
+            FillVendedores();
         }
 
         private async void FillUsuarios()

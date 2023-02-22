@@ -1,6 +1,5 @@
 * {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    
 }
 
 html {
@@ -183,18 +182,18 @@ body {
     padding: .5em;
 }
 
-.PetData div p {
-    width: 5em;
-    border: 1px double black;
-    border-radius:1em;
-    margin: 0;
-    text-align:center;
-}
+    .PetData div p {
+        width: 5em;
+        border: 1px double black;
+        border-radius: 1em;
+        margin: 0;
+        text-align: center;
+    }
 
-.PetData div p:first-child {
-    text-align:left !important;
-    border:none;
-}
+        .PetData div p:first-child {
+            text-align: left !important;
+            border: none;
+        }
 
 /* Change styles for span and cancel button on extra small screens */
 /*@media screen and (max-width: 300px) {
@@ -382,6 +381,7 @@ hr {
     clear: both;
     display: table;
 }
+
 @-webkit-keyframes animatezoom {
     from {
         -webkit-transform: scale(0)
@@ -419,25 +419,26 @@ hr {
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    padding:1em;
-    border-radius:1em;
+    padding: 1em;
+    border-radius: 1em;
 }
-    .ClientPets p{
-        margin:0;
+
+    .ClientPets p {
+        margin: 0;
     }
 
-    .ClientPetsItem {
-        display: flex;
-        flex-direction: row;
-        width: 100%;
-        margin: 0 auto;
-        border: 1px double black;
-        border-radius: 1em;
-        margin-top: 1em;
-        padding: .5em;
-        align-items: center;
-        justify-content: center;
-    }
+.ClientPetsItem {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin: 0 auto;
+    border: 1px double black;
+    border-radius: 1em;
+    margin-top: 1em;
+    padding: .5em;
+    align-items: center;
+    justify-content: center;
+}
 
 .ClientPets h2 {
     text-align: center;
@@ -501,3 +502,93 @@ hr {
 /*ENDD*/
 
 
+/*ListSellers.cshtml*/
+
+.sectionListSellers{
+    display:flex;
+    flex-direction:row;
+    width:100%;
+}
+.Tarjeta {
+    text-align: center;
+    border-radius: 0em 0em 1em 1em;
+    margin: 1em;
+    width:25%
+}
+
+.Tarjeta-body {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid #91a5c7;
+    padding: .5em;
+    border-radius: 1em;
+}
+
+.Tarjeta-encabezado {
+    border-right: .5px double #a6bde3;
+    padding-left: 1em;
+    padding-right: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: rgb(16, 67, 126);
+}
+
+.Tarjeta-contenedorDatosVendedor {
+    display: flex;
+    flex-direction: column;
+    padding-left: 1em;
+    padding-right: 1em;
+    width: 100%;
+}
+
+.Tarjeta-btnInfo {
+    width: 100%;
+    /*LightGreen*/
+    background-color: lightblue;
+    color: #2e4175;
+    padding: .5em;
+    border-radius: .2em;
+    margin-top: auto;
+    font-weight: 500;
+}
+
+.Tarjeta-contenedorDatosDiarios {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: rgb(16, 67, 126);
+}
+
+.Tarjeta-contenedorDatosHistoricos {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: rgb(16, 67, 126);
+}
+
+    .Tarjeta-contenedorDatosHistoricos p, .Tarjeta-contenedorDatosDiarios p {
+        margin-left: 1em;
+        margin-bottom: 0;
+        font-size: 1.1em;
+    }
+
+    .Tarjeta h5{
+        margin: 0;
+    }
+.btnHistoricoVenta {
+    /*LightGreen*/
+    background-color: LightGreen !important;
+    color: rgb(16, 67, 126);
+}
+
+.tituloDatosVendedor {
+    font-size: 1.1em;
+    text-align: left;
+    color: rgb(16, 67, 126);
+    margin:0;
+    margin-top:.3em;
+}
+
+/*ENDD*/

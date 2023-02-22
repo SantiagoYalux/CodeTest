@@ -7,6 +7,7 @@ namespace CodeTestTotal.Interfaces
     {
         Task<bool> AddNewOrderAsync(NewOrdenViewModel oNewOrderViewModel);
         Task<List<Pedido>> GetAllOrders();
+        Task<int> GetNumberOfOrders(int VendedorID, bool onlyToday);
         Task<List<Pedido>> GetPetsOrders(int mascotaID);
         Task<bool> MaskAsDespachado(int PedidoID);
     }

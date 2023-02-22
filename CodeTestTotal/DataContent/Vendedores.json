@@ -1,6 +1,14 @@
-{
-  "VendedorID": 1,
-  "VendedorNombre": "Santiago",
-  "VendedorApellido": "Yalux",
-  "VendedorFechaIncorporación": "2023-02-20T17:41:01.3707762-03:00"
-}
+[
+  {
+    "VendedorID": 1,
+    "VendedorNombre": "Santiago",
+    "VendedorApellido": "Yalux",
+    "VendedorFechaIncorporación": "2023-02-20T17:41:01.3707762-03:00"
+  },
+  {
+    "VendedorID": 2,
+    "VendedorNombre": "Pepito",
+    "VendedorApellido": "pats",
+    "VendedorFechaIncorporación": "2023-02-20T17:41:01.3707762-03:00"
+  }
+]

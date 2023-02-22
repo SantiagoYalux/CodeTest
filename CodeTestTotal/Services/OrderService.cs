@@ -69,6 +69,17 @@ namespace CodeTestTotal.Services
             return result;
         }
 
+        public async Task<int> GetNumberOfOrders(int VendedorID, bool onlyToday)
+        {
+            List<Pedido> pedidos = new List<Pedido>();
+            if (onlyToday)
+                pedidos = _DbContext.Pedidos.Where(x => x.PedidoVendedorID == VendedorID && x.PedidoFechaDespachado.Value.Date == DateTime.Today.Date).ToList();
+            else
+                pedidos = _DbContext.Pedidos.Where(x => x.PedidoVendedorID == VendedorID).ToList();
+
+            return pedidos.Count();
+        }
+
         //public async Task<int> GetCountOrderByClientID(int clientID)
         //{
         //    var Pedidos = _DbContext.Pedidos;
