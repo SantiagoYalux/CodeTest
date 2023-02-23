@@ -13,8 +13,10 @@ builder.Services.AddSingleton<IClientService, ClientService>();
 builder.Services.AddSingleton<IPetService, PetService>();
 builder.Services.AddSingleton<IOrdenService, OrderService>();
 builder.Services.AddSingleton<ISellerService, SellerService>();
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddTransient<IUserStore<Usuario>, UserStoreService>();
 builder.Services.AddIdentityCore<Usuario>();
+builder.Services.AddTransient<SignInManager<Usuario>>();
 
 builder.Services.AddIdentityCore<Usuario>(opciones =>
 {
@@ -24,6 +26,14 @@ builder.Services.AddIdentityCore<Usuario>(opciones =>
     opciones.Password.RequireNonAlphanumeric = false;
 });
 /*Password rules*/
+
+/*Configuracion para que nuestra aplicacion entienda el uso de cookies para autenticación*/
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = IdentityConstants.ApplicationScheme;
+    options.DefaultChallengeScheme = IdentityConstants.ApplicationScheme;
+    options.DefaultSignInScheme= IdentityConstants.ApplicationScheme;
+}).AddCookie(IdentityConstants.ApplicationScheme);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -42,6 +52,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

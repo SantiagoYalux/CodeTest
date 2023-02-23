@@ -11,10 +11,14 @@ namespace CodeTestTotal.Controllers
     {
         private IUserService _IUserService;
         private UserManager<Usuario> _UserManager;
-        public UserController(IUserService IUserService, UserManager<Usuario> userManager)
+        private SignInManager<Usuario> _SignInManager;
+        public UserController(IUserService IUserService, UserManager<Usuario> userManager, SignInManager<Usuario> SignInManager)
         {
             _IUserService = IUserService;
             _UserManager = userManager;
+
+            /*handle cookie*/
+            _SignInManager = SignInManager;
         }
 
         public IActionResult Login()
@@ -43,6 +47,9 @@ namespace CodeTestTotal.Controllers
 
             if (result.Succeeded) 
             {
+
+                await _SignInManager.SignInAsync(usuario, isPersistent: false);
+                
                 return RedirectToAction("Index", "Client");
             }
             else
