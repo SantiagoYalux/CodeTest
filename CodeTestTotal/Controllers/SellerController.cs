@@ -1,5 +1,6 @@
 ﻿using CodeTestTotal.Interfaces;
 using CodeTestTotal.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CodeTestTotal.Controllers
@@ -15,9 +16,11 @@ namespace CodeTestTotal.Controllers
             _IOrdenService = IOrdenService;
             _IUserService = iUserService;
         }
+        [HttpGet]
         public async Task<ActionResult> ListSellers()
         {
             List<ListSellersViewModel> Model = new List<ListSellersViewModel>();
+            
 
             var listSellers = await _ISellerService.GetAllSellers();
 

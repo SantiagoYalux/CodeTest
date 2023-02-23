@@ -1,13 +1,23 @@
 using CodeTestTotal.Interfaces;
 using CodeTestTotal.Models;
 using CodeTestTotal.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 /*Inject dependencies*/
-builder.Services.AddSingleton<DBContext>();
+var authenticatedUsersPolicy = new AuthorizationPolicyBuilder()
+    .RequireAuthenticatedUser()
+    .Build();
+/*Para no agregar la etiqueta authorize en todos los controladores, vamos a implementar el authorize a nivel global, a TODOS nuestros controladores*/
+builder.Services.AddControllersWithViews(opciones =>
+{
+    opciones.Filters.Add(new AuthorizeFilter(authenticatedUsersPolicy));
+});
 
+builder.Services.AddSingleton<DBContext>();
 builder.Services.AddSingleton<IUserService, UserService>();
 builder.Services.AddSingleton<IClientService, ClientService>();
 builder.Services.AddSingleton<IPetService, PetService>();
@@ -27,16 +37,21 @@ builder.Services.AddIdentityCore<Usuario>(opciones =>
 });
 /*Password rules*/
 
-/*Configuracion para que nuestra aplicacion entienda el uso de cookies para autenticación*/
+/*Configuracion para que nuestra aplicacion entienda el uso de cookies para autenticación, además vamos a configurar la ruta a la que el usuario será redirigido cuando no está autorizado*/
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = IdentityConstants.ApplicationScheme;
     options.DefaultChallengeScheme = IdentityConstants.ApplicationScheme;
     options.DefaultSignInScheme= IdentityConstants.ApplicationScheme;
-}).AddCookie(IdentityConstants.ApplicationScheme);
+}).AddCookie(IdentityConstants.ApplicationScheme, opciones =>
+{
+    opciones.LoginPath = "/User/Login";
+});
+
+
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+//builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 

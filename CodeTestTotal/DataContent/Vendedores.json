@@ -1,1 +1,23 @@
-[{"VendedorID":1,"VendedorNombre":"Santiago","VendedorApellido":"Yalux","VendedorFechaIncorporaci\u00F3n":"2023-02-20T17:41:01.3707762-03:00","VendedorUsuarioID":4},{"VendedorID":5,"VendedorNombre":"Julio","VendedorApellido":"Sosa","VendedorFechaIncorporaci\u00F3n":"2002-10-24T00:00:00","VendedorUsuarioID":20},{"VendedorID":6,"VendedorNombre":"jhonatah","VendedorApellido":"Jaime","VendedorFechaIncorporaci\u00F3n":"2023-02-22T00:00:00","VendedorUsuarioID":21}]
+[
+  {
+    "VendedorID": 1,
+    "VendedorNombre": "Santiago",
+    "VendedorApellido": "Yalux",
+    "VendedorFechaIncorporaci\u00F3n": "2023-02-20T17:41:01.3707762-03:00",
+    "VendedorUsuarioID": 4
+  },
+  {
+    "VendedorID": 5,
+    "VendedorNombre": "Julio",
+    "VendedorApellido": "Sosa",
+    "VendedorFechaIncorporaci\u00F3n": "2002-10-24T00:00:00",
+    "VendedorUsuarioID": 20
+  },
+  {
+    "VendedorID": 6,
+    "VendedorNombre": "jhonatah",
+    "VendedorApellido": "Jaime",
+    "VendedorFechaIncorporaci\u00F3n": "2023-02-22T00:00:00",
+    "VendedorUsuarioID": 21
+  }
+]

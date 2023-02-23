@@ -1,15 +1,21 @@
 ﻿using CodeTestTotal.Interfaces;
 using CodeTestTotal.Models;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace CodeTestTotal.Services
 {
     public class UserService : IUserService
     {
         private DBContext _dbContext;
-        public UserService(DBContext dbContext)
+
+        private readonly HttpContext _HttpContext;
+        public UserService(DBContext dbContext, IHttpContextAccessor IHttpContextAccessor)
         {
-            _dbContext = dbContext; 
+            _dbContext = dbContext;
+            _HttpContext = IHttpContextAccessor.HttpContext;
         }
+
         public Task<bool> Login(string username, string password)
         {
             var users = _dbContext.Usuarios;
@@ -66,6 +72,21 @@ namespace CodeTestTotal.Services
             }
 
             return Result;
+        }
+
+        public int GetCurrentUser()
+        {
+            if(_HttpContext.User.Identity.IsAuthenticated)
+            {
+                var idClaim = _HttpContext.User
+                    .Claims.Where(x => x.Type == ClaimTypes.NameIdentifier).FirstOrDefault();
+                var id = int.Parse(idClaim.Value);
+                return id;
+            }
+            else
+            {
+                throw new ApplicationException("El usuario no está autenticado");
+            }
         }
     }
 }

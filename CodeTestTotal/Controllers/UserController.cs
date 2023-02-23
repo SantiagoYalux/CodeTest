@@ -2,6 +2,7 @@
 using CodeTestTotal.Models;
 using CodeTestTotal.ViewModel;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -22,6 +23,7 @@ namespace CodeTestTotal.Controllers
             _SignInManager = SignInManager;
         }
 
+        [AllowAnonymous]
         public IActionResult Login()
         {
             return View();
@@ -52,7 +54,7 @@ namespace CodeTestTotal.Controllers
             }
 
         }
-
+        [AllowAnonymous]
         public IActionResult Register()
         {
             return View();
