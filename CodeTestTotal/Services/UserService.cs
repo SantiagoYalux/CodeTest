@@ -59,7 +59,7 @@ namespace CodeTestTotal.Services
 
             foreach (var user in users)
             {
-                if (user.UsuarioUsername == username)
+                if (user.UsuarioUsernameNormalizado == username)
                 {
                     Result = user;
                 }

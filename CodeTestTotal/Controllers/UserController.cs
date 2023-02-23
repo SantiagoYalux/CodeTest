@@ -26,6 +26,33 @@ namespace CodeTestTotal.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginViewModel loginViewModel)
+        {
+            /*Validate Modelo*/
+            if (!ModelState.IsValid)
+            {
+                //If the model is not valid
+                return View(loginViewModel);
+            }
+
+            var result2 = await _SignInManager.PasswordSignInAsync(loginViewModel.Username, loginViewModel.Password, loginViewModel.RememberMe, lockoutOnFailure:false);
+
+            if (result2.Succeeded)
+            { 
+                //Login succcessful
+                //Redirect to Index page
+                return RedirectToAction("Index", "Client");
+            }
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Nombre de usuario o contraseña incorrectos");
+                return View(loginViewModel);
+            }
+
+        }
+
         public IActionResult Register()
         {
             return View();
@@ -62,30 +89,6 @@ namespace CodeTestTotal.Controllers
             return View(oRegisterViewModel);
             }
 
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Login(LoginViewModel loginViewModel)
-        {
-            /*Validate ViewModel*/
-            if (!ModelState.IsValid)
-            {
-                //If the model is not valid
-                return View(loginViewModel);
-            }
-
-            var resultado = await _IUserService.Login(loginViewModel.Username, loginViewModel.Password);
-
-            if (resultado)
-            {
-                //Redirect to Index page
-                return RedirectToAction("Index", "Client");
-            }
-            else
-            {
-                ModelState.AddModelError(string.Empty, "Nombre de usuario o contraseña incorrectos");
-                return View(loginViewModel);
-            }
         }
         
         [HttpPost] 
