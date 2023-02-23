@@ -29,7 +29,7 @@ namespace CodeTestTotal.Services
         {
             int result = 0;
             Usuario newUser = new Usuario();
-            newUser.UsuarioId = 20;
+            newUser.UsuarioId = await _dbContext.GetLastId(newUser) + 1;
             newUser.UsuarioUsername = username;
             newUser.UsuarioPassword = password;
 

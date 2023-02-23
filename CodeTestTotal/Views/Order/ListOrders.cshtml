@@ -27,7 +27,7 @@
                 <td>@oPurchaseOrder.PedidoVendedorNombre</td>
 
                 <td>
-                    <button class="btn btn-primary btnAbrirOffScrolling" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling"
+                    <button class="btn btnInfo btn btn-success btnAbrirOffScrolling" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling"
                         aria-controls="offcanvasScrolling" onclick="ShowOrder(@oPurchaseOrder.PedidoID)">
                         Info
                     </button>
@@ -36,7 +36,7 @@
                 @if (@oPurchaseOrder.PedidoFechaDespachado == null)
                 {
                     <td>
-                        <button class="btn btn-primary btnAbrirOffScrolling" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling"
+                        <button class="btn btnInfo btn btn-success btnAbrirOffScrolling" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling"
                         aria-controls="offcanvasScrolling" onclick="MaskAsDespachado(@oPurchaseOrder.PedidoID)">
                             Despachar
                         </button>

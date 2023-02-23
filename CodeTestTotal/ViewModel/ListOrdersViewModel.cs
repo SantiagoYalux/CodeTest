@@ -5,6 +5,7 @@
         public int PedidoID { get; set; }
         public string? MascotaNombre { get; set; }
         public string? ClienteNombre { get; set; }
+        public int ClienteID { get; set; }
         public DateTime PedidoFecha { get; set; }
         public DateTime? PedidoFechaDespachado { get; set; }
         public int? PedidoVendedorID { get; set; }

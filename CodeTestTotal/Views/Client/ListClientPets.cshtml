@@ -19,7 +19,7 @@
                 <h4 class="clientName"><b>@a.clientName</b></h4>
                 <div class="buttonsContainer">
 
-                    <button class="button info">Pedidos</button>
+                    <a class="button Tarjeta-btnInfo" asp-controller="Order" asp-action="ListOrders" asp-route-ClientID="@a.clientID">Pedidos</a>
                     <input type="hidden" asp-for="@a.clientID">
                     <button class="button info" onclick="ShowContent(@a.clientID)" id="search">Mascotas(@a.pets.Count)</button>
                 </div>
@@ -33,11 +33,11 @@
 <script>
     var url = '@Url.Action("_ListPets","Client")';
 
-    function ShowContent(id){
+    function ShowContent(id) {
         console.log(id)
         document.getElementById('id01').style.display = 'block'
 
-        $('#id01').load(url, { clientID :id});
+        $('#id01').load(url, { clientID: id });
     }
 
 

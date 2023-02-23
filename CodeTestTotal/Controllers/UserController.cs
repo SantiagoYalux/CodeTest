@@ -16,6 +16,17 @@ namespace CodeTestTotal.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public async Task<ActionResult> Register(RegisterViewModel oRegisterViewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(oRegisterViewModel);
+            }
+
+            return RedirectToAction("","");
+            return View();
+        }
 
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel loginViewModel)

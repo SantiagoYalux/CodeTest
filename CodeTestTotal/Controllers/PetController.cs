@@ -24,7 +24,7 @@ namespace CodeTestTotal.Controllers
 
             ViewBag.OpcionesTipoMascota = lstTipoMascota;
             ViewBag.OpcionesCastrado = lstCastrado;
-            return View();
+            return PartialView();
         }
 
         [HttpPost]

@@ -79,7 +79,7 @@ namespace CodeTestTotal.Controllers
                 return View(oNewOrdenViewModel);
             }
 
-            var result = await _IOrdenService.AddNewOrderAsync(oNewOrdenViewModel);
+            var result = await _IOrdenService.AddNewOrder(oNewOrdenViewModel);
 
             if (result)
             {
@@ -111,12 +111,12 @@ namespace CodeTestTotal.Controllers
 
                 if (order.PedidoVendedorID != null)
                 {
-                    itemModel.OrderMessage = $"El pedido para Don Gato fue despachado con éxito a las {order.PedidoFechaDespachado} por el vendedor {order.PedidoVendedorNombre}";
+                    itemModel.OrderMessage = $"El pedido para {nameMascota} realizado a las {order.PedidoFecha} fue despachado con éxito a las {order.PedidoFechaDespachado} por el vendedor {order.PedidoVendedorNombre}";
                     itemModel.PetOrderProgressImage = "Despachado.png";
                 }
                 else
                 {
-                    itemModel.OrderMessage = "El pedido para Don Gato no fue despachado";
+                    itemModel.OrderMessage = $"El pedido para {nameMascota} realizado a las {order.PedidoFecha} no fue despachado";
                     itemModel.PetOrderProgressImage = "NoDespachado.png";
                 }
                 Model.Add(itemModel);
@@ -125,13 +125,10 @@ namespace CodeTestTotal.Controllers
             return PartialView(Model);
         }
 
-        public async Task<ActionResult> ListOrders(int vendedorID = 0)
+        public async Task<ActionResult> ListOrders(int vendedorID = 0, int ClientID = 0)
         {
             /*Get order history*/
             var orders = await _IOrdenService.GetAllOrders();
-
-            if (vendedorID != 0)
-                orders = orders.Where(x => x.PedidoVendedorID == vendedorID).ToList();
 
             List<ListOrdersViewModel> Model = new List<ListOrdersViewModel>();
 
@@ -146,6 +143,7 @@ namespace CodeTestTotal.Controllers
                 oListOrdersViewModel.PedidoID = oItem.PedidoID;
                 oListOrdersViewModel.MascotaNombre = oPet.MascotaNombre;
                 oListOrdersViewModel.ClienteNombre = client.ClienteNombre;
+                oListOrdersViewModel.ClienteID = client.ClienteID;
                 oListOrdersViewModel.PedidoFecha = oItem.PedidoFecha;
                 oListOrdersViewModel.PedidoFechaDespachado = oItem.PedidoFechaDespachado;
                 oListOrdersViewModel.PedidoVendedorID = oItem.PedidoVendedorID;
@@ -153,6 +151,12 @@ namespace CodeTestTotal.Controllers
 
                 Model.Add(oListOrdersViewModel);
             }
+
+            if (vendedorID != 0)
+                Model = Model.Where(x => x.PedidoVendedorID == vendedorID).ToList();
+
+            if (ClientID != 0)
+                Model = Model.Where(x => x.ClienteID == ClientID).ToList();
 
             return View(Model);
         }

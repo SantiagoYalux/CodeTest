@@ -12,12 +12,12 @@ namespace CodeTestTotal.Services
             _DbContext = DBContext;
         }
 
-        public async Task<bool> AddNewOrderAsync(NewOrdenViewModel oNewOrderViewModel)
+        public async Task<bool> AddNewOrder(NewOrdenViewModel oNewOrderViewModel)
         {
             bool result = false;
 
             Pedido oNewPedido = new Pedido();
-            oNewPedido.PedidoID = 1;
+            oNewPedido.PedidoID = await _DbContext.GetLastId(oNewPedido) +1;
 
             oNewPedido.PedidoMascotaID = oNewOrderViewModel.MascotaID;
 
@@ -28,8 +28,8 @@ namespace CodeTestTotal.Services
             oNewPedido.PedidoComplementoAlimientoCastrado = oNewOrderViewModel.CantComplementoAlimientoCastrado;
 
             oNewPedido.PedidoFecha = DateTime.Now;
-            oNewPedido.PedidoFechaDespachado = DateTime.Now;
             /*when registering the new order the following fields will not be filled*/
+            oNewPedido.PedidoFechaDespachado = null;
             oNewPedido.PedidoDespachado = null;
             oNewPedido.PedidoVendedorID = null;
 

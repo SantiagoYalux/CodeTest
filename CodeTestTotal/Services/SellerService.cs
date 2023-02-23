@@ -21,8 +21,8 @@ namespace CodeTestTotal.Services
             bool result = false;
 
             Vendedor oNewVendedor = new Vendedor();
-            oNewVendedor.VendedorID = 5;
-            oNewVendedor.VendedorUsuarioID = 3;
+            oNewVendedor.VendedorID = await _DbContext.GetLastId(oNewVendedor) +1;
+            oNewVendedor.VendedorUsuarioID = newUserID;
 
             oNewVendedor.VendedorNombre = oNewSellerViewModel.VendedorNombre;
 

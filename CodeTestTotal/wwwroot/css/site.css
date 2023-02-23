@@ -82,13 +82,17 @@ body {
     display: flex;
     flex-direction: column;
     margin: 1em;
+    padding: 1em;
+    border-radius: 1em;
+    -webkit-box-shadow: 9px 15px 20px 0px #a6bde3;
+    -moz-box-shadow: 9px 15px 20px 0px #a6bde3;
+    box-shadow: 9px 15px 20px 0px #a6bde3;
 }
 
 .Mascota_foto {
     width: 180px;
     height: 140px;
     border-radius: 1em;
-    border: 1px double black;
 }
 
 .Mascota_imagenes {
@@ -100,7 +104,7 @@ body {
     background-color: white;
     position: absolute;
     bottom: -1em;
-    right: -1em;
+    right: -.5em;
     border-radius: 5em;
     padding: .3em;
     border: 1px solid black;
@@ -115,22 +119,25 @@ body {
 
 .btnInfo {
     text-decoration: none;
-    background-color: #bbc4bd;
-    color: whitesmoke;
+    background-color: #2196f3;
+    color: white;
     font-size: 1.2em;
     margin-top: .2em;
     text-align: center;
-    border-radius: 10em;
+    border-radius: .3em;
+    border: 0;
+    -webkit-transition: all 0.35s;
+    transition: all 0.35s;
 }
 
+    .btnInfo:hover {
+        color: #fff; /* color de fuente hover */
+        background-color: rgb(58, 125, 202 );
+    }
+
+
 .AgregarMascota {
-    position: absolute;
-    bottom: 5em;
-    right: 5em;
-    border: 1px solid black;
-    border-radius: 2em;
-    padding: 1em;
-    background-color: rgb(90, 198, 90);
+    width: 2em;
 }
 /*END*/
 
@@ -143,6 +150,7 @@ body {
     border-radius: 1em;
     box-shadow: inset 0 -3em 3em rgba(0,0,0,0.1), 0 0 0 2px rgb(255,255,255), 0.3em 0.3em 1em rgba(0,0,0,0.3);
 }
+
 .formNewOrder {
     display: flex;
     flex-direction: column;
@@ -225,6 +233,7 @@ body {
     padding: 1em;
     box-shadow: inset 0 -3em 3em rgba(0,0,0,0.1), 0 0 0 2px rgb(255,255,255), 0.3em 0.3em 1em rgba(0,0,0,0.3);
 }
+
 .OrderListItem {
     display: flex;
     flex-direction: row;
@@ -292,7 +301,7 @@ body {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     transition: 0.3s;
     border-radius: 5px; /* 5px rounded corners */
-    width: 13%;
+    width: 15%;
     height: 100%;
     margin-left: 1em;
 }
@@ -315,10 +324,13 @@ img {
     margin-top: .2em;
     margin-bottom: .2em;
     border-radius: .3em;
+    text-decoration: none;
+    text-align: center;
 }
 
 .info {
     background-color: #2196f3;
+    transition: 0.3s;
 }
     /* Blue */
 
@@ -520,18 +532,20 @@ hr {
 
 /*ListSellers.cshtml*/
 
-.sectionListSellers{
-    display:flex;
-    flex-direction:row;
-    width:100%;
-}
-.Tarjeta {
-    text-align: center;
-    border-radius: 0em 0em 1em 1em;
-    margin: 1em;
-    width:25%
+.sectionListSellers {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
 }
 
+.Tarjeta {
+    text-align: center;
+    margin: 1em;
+    width: 25%;
+    border-radius:1em;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
+    transition: 0.3s;
+}
 .Tarjeta-body {
     display: flex;
     flex-direction: row;
@@ -562,12 +576,17 @@ hr {
 .Tarjeta-btnInfo {
     width: 100%;
     /*LightGreen*/
-    background-color: lightblue;
-    color: #2e4175;
+    transition: 0.3s;
+    background-color: #2196f3;
+    text-decoration:none;
+    color: white;
     padding: .5em;
     border-radius: .2em;
-    margin-top: auto;
-    font-weight: 500;
+    margin-top: .2em;
+}
+.Tarjeta-btnInfo:hover {
+    color: #fff; /* color de fuente hover */
+    background-color: rgb(58, 125, 202 );
 }
 
 .Tarjeta-contenedorDatosDiarios {
@@ -590,21 +609,27 @@ hr {
         font-size: 1.1em;
     }
 
-    .Tarjeta h5{
-        margin: 0;
-    }
-.btnHistoricoVenta {
-    /*LightGreen*/
-    background-color: LightGreen !important;
-    color: rgb(16, 67, 126);
+.Tarjeta h5 {
+    margin: 0;
 }
+
 
 .tituloDatosVendedor {
     font-size: 1.1em;
     text-align: left;
     color: rgb(16, 67, 126);
-    margin:0;
-    margin-top:.3em;
+    margin: 0;
+    margin-top: .3em;
 }
 
 /*ENDD*/
+
+
+.btn-success {
+    box-shadow: 0 4px 8px 0 #a6bde3;
+    transition: 0.3s;
+}
+
+.centrarColumna{
+    text-align:center;
+}

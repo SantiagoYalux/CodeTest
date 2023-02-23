@@ -1,13 +1,13 @@
 ﻿@using CodeTestTotal.ViewModel;
 @model List<ListSellersViewModel>
 
+<a class="d-flex btnInfo btn btn-success" onclick="AddNewSeller()" >
+    Agregar Vendedor
+</a>
+
 <div id="id01" class="modal">
 
-    <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">times;</span>
-</div>
-<button class="d-flex btnAgregarProducto btn btn-success" onclick="AddNewSeller()" style="background-color:rgb(58, 125, 202 ); border-color:white;">
-    Agregar Vendedor
-</button>
+ </div>
 
 <section class="sectionListSellers">
 
@@ -20,9 +20,8 @@
                     <img src="/Images/usuario.png" class="card-img-top imagen" alt="@item.VendedorNombre">
 
                     <h5>@item.VendedorNombre</h5>
-
-                    <a asp-action="AddModEmpleado" asp-route-EmpleadoID="@item.VendedorID"
-                   class="Tarjeta-btnInfo">Info</a>
+                    <h5>@item.VendedorApellido</h5>
+          
                 </div>
 
                 <div class="Tarjeta-contenedorDatosVendedor">
@@ -40,7 +39,7 @@
                         </div>
                     </div>
                     <a asp-controller="Order" asp-action="ListOrders" asp-route-VendedorID="@item.VendedorID"
-                   class="Tarjeta-btnInfo btnHistoricoVenta">Pedidos</a>
+                   class="Tarjeta-btnInfo">Pedidos</a>
                 </div>
             </div>
         </article>

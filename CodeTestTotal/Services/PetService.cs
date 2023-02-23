@@ -23,10 +23,9 @@ namespace CodeTestTotal.Services
         public async Task<bool> AddNewPetAsync(AddPetViewModel AddPetViewModel, int clientID)
         {
             bool value = false;
-            var LastID = 1;
 
             Mascota oNewMascota = new Mascota();
-            oNewMascota.MascotaID = LastID + 1;
+            oNewMascota.MascotaID = await _DbContext.GetLastId(oNewMascota) + 1;
             oNewMascota.MascotaNombre = AddPetViewModel.MascotaNombre;
             oNewMascota.MascotaClientID = clientID;
             oNewMascota.MascotaEdad = AddPetViewModel.MascotaEdad;
