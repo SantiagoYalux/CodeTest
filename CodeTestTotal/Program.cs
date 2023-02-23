@@ -1,6 +1,7 @@
 using CodeTestTotal.Interfaces;
 using CodeTestTotal.Models;
 using CodeTestTotal.Services;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,17 @@ builder.Services.AddSingleton<IClientService, ClientService>();
 builder.Services.AddSingleton<IPetService, PetService>();
 builder.Services.AddSingleton<IOrdenService, OrderService>();
 builder.Services.AddSingleton<ISellerService, SellerService>();
+builder.Services.AddTransient<IUserStore<Usuario>, UserStoreService>();
+builder.Services.AddIdentityCore<Usuario>();
+
+builder.Services.AddIdentityCore<Usuario>(opciones =>
+{
+    opciones.Password.RequireDigit = false;
+    opciones.Password.RequireUppercase = false;
+    opciones.Password.RequireLowercase = false;
+    opciones.Password.RequireNonAlphanumeric = false;
+});
+/*Password rules*/
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

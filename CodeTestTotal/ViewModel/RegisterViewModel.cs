@@ -5,8 +5,7 @@ namespace CodeTestTotal.ViewModel
     public class RegisterViewModel
     {
         [Required(ErrorMessage ="El campo {0} es requerido")]
-        [EmailAddress(ErrorMessage = "El campo debe ser un correo electrónico válido")]
-        public string Email { get; set; }
+        public string Username { get; set; }
 
         [Required(ErrorMessage = "El campo {0} es requerido")]
         public string Password { get; set; }

@@ -234,19 +234,24 @@ namespace CodeTestTotal.Models
             switch (type.Name)
             {
                 case "Mascota":
-                    resultado = Mascotas.Max(x=> x.MascotaID);
+                    if(Mascotas.Count > 0)
+                        resultado = Mascotas.Max(x=> x.MascotaID);
                     break;
                 case "Usuario":
-                    resultado = Usuarios.Max(x=> x.UsuarioId);
+                    if (Usuarios.Count > 0)
+                        resultado = Usuarios.Max(x=> x.UsuarioId);
                     break;
                 case "Vendedor":
-                    resultado = Vendedores.Max(x=> x.VendedorID);
+                    if (Vendedores.Count > 0)
+                        resultado = Vendedores.Max(x=> x.VendedorID);
                     break;
                 case "Cliente":
-                    resultado = Clientes.Max(x=> x.ClienteID);
+                    if (Clientes.Count > 0)
+                        resultado = Clientes.Max(x=> x.ClienteID);
                     break;
                 case "Pedido":
-                    resultado = Pedidos.Max(x=> x.PedidoID);
+                    if (Pedidos.Count > 0)
+                        resultado = Pedidos.Max(x=> x.PedidoID);
                     break;
 
                 default:

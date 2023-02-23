@@ -1,18 +1,27 @@
 ﻿using CodeTestTotal.Interfaces;
+using CodeTestTotal.Models;
 using CodeTestTotal.ViewModel;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace CodeTestTotal.Controllers
 {
     public class UserController : Controller
     {
         private IUserService _IUserService;
-        public UserController(IUserService IUserService)
+        private UserManager<Usuario> _UserManager;
+        public UserController(IUserService IUserService, UserManager<Usuario> userManager)
         {
             _IUserService = IUserService;
+            _UserManager = userManager;
         }
 
         public IActionResult Login()
+        {
+            return View();
+        }
+        public IActionResult Register()
         {
             return View();
         }
@@ -24,8 +33,27 @@ namespace CodeTestTotal.Controllers
                 return View(oRegisterViewModel);
             }
 
-            return RedirectToAction("","");
-            return View();
+            var usuario = new Usuario()
+            {
+                UsuarioUsername = oRegisterViewModel.Username
+            };
+
+            var result = await _UserManager.CreateAsync(usuario, password: oRegisterViewModel.Password);
+
+
+            if (result.Succeeded) 
+            {
+                return RedirectToAction("Index", "Client");
+            }
+            else
+            {
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+            return View(oRegisterViewModel);
+            }
+
         }
 
         [HttpPost]

@@ -2,31 +2,7 @@
   {
     "UsuarioId": 1,
     "UsuarioUsername": "Syalux",
-    "UsuarioPassword": "1234"
-  },
-  {
-    "UsuarioId": 2,
-    "UsuarioUsername": "Pepe",
-    "UsuarioPassword": "1234"
-  },
-  {
-    "UsuarioId": 3,
-    "UsuarioUsername": "Juan",
-    "UsuarioPassword": "1234"
-  },
-  {
-    "UsuarioId": 4,
-    "UsuarioUsername": "Vendedor",
-    "UsuarioPassword": "1234"
-  },
-  {
-    "UsuarioId": 20,
-    "UsuarioUsername": "julito",
-    "UsuarioPassword": "1234"
-  },
-  {
-    "UsuarioId": 21,
-    "UsuarioUsername": "Jonhatan",
-    "UsuarioPassword": "1234"
+    "UsuarioUsernameNormalizado": "SYALUX",
+    "UsuarioPasswordHash": "AQAAAAEAACcQAAAAEPKEks\u002BHz0WfJUPN27wbueklXiHQhuKXX3GyADis9cU\u002Bb9bhBtJJb5yuvkf6zv1huA=="
   }
 ]
