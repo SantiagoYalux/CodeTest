@@ -1,6 +1,7 @@
 ﻿using CodeTestTotal.Interfaces;
 using CodeTestTotal.Models;
 using CodeTestTotal.ViewModel;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -85,6 +86,14 @@ namespace CodeTestTotal.Controllers
                 ModelState.AddModelError(string.Empty, "Nombre de usuario o contraseña incorrectos");
                 return View(loginViewModel);
             }
+        }
+        
+        [HttpPost] 
+
+        public async Task <IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync(IdentityConstants.ApplicationScheme);
+            return RedirectToAction("Login");
         }
     }
 }
