@@ -6,20 +6,20 @@
 }
 
 <div class="mensajeDeContacto">
-    <h3 class="mb-3">TotalSell</h3>
+    <h3 class="mb-3" style="margin-top:1em;">TotalSell</h3>
 </div>
 
 <div class="container ">
 
     <form asp-controller="User" asp-action="Login" class="formContacto">
         <div class="mb-3">
-            <label asp-for="Username" class="form-label"></label>
+            <label asp-for="Username" class="form-label">Nombre de usuario</label>
             <input asp-for="Username" class="form-control controls " />
             <span asp-validation-for="Username" class="text-danger"></span>
         </div>
 
         <div class="mb-3">
-            <label asp-for="Password" class="form-label"></label>
+            <label asp-for="Password" class="form-label">Contraseña</label>
             <input asp-for="Password" class="form-control controls " />
             <span asp-validation-for="Password" class="text-danger"></span>
         </div>
@@ -27,7 +27,7 @@
 
         <div class="class-check">
             <input class="form-check-input" type="checkbox" asp-for="RememberMe"/>
-            <label class="form-check-label" asp-for="RememberMe"></label>
+            <label class="form-check-label" asp-for="RememberMe">Recuérdame</label>
         </div>
 
         <button type="submit" class="btn-lg btnEnviar">Login</button>

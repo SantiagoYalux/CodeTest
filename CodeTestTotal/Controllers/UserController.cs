@@ -46,39 +46,25 @@ namespace CodeTestTotal.Controllers
             }
 
             var result = await _SignInManager.PasswordSignInAsync(loginViewModel.Username, loginViewModel.Password, loginViewModel.RememberMe, lockoutOnFailure: false);
-            
-            var user = await _IUserService.SearchUserByUsername(loginViewModel.Username.ToUpper());
 
-            var roles = await _UserManager.GetRolesAsync(user);
-
-            var asd = User.IsInRole("Cliente");
             if (result.Succeeded)
             {
                 //Login succcessful
                 //Redirect to Index page
 
-                if (User.Identity.IsAuthenticated)
-                {
-                    var claims = User.Claims.ToList();
-                    var userID = int.Parse(claims[0].Value);
-                    
+                var user = await _IUserService.SearchUserByUsername(loginViewModel.Username.ToUpper());
+                //await _SignInManager.SignInAsync(user, isPersistent: false);
 
-                    //if (type == "C")
-                    //{
-                    //    ViewBag.TypeUser = "C";
+                var rolVendedor = await _UserManager.GetRolesAsync(user);
+
+                if(rolVendedor.Contains("VENDEDOR"))
+                    return RedirectToAction("ListSellers", "Seller");
+
+                if (rolVendedor.Contains("CLIENTE"))
                     return RedirectToAction("Index", "Client");
-                    //}
-                    //else
-                    //{
-                    //    ViewBag.TypeUser = "V";
-                    //    return RedirectToAction("Order", "ListOrders");
-                    //}
 
-                }
-
-                ModelState.AddModelError(string.Empty, "El usuario no tiene un rol");
+                ModelState.AddModelError(string.Empty, "El usuario no tiene un rol determinado");
                 return View(loginViewModel);
-
             }
             else
             {

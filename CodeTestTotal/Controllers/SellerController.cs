@@ -1,5 +1,6 @@
 ﻿using CodeTestTotal.Interfaces;
 using CodeTestTotal.Models;
+using CodeTestTotal.Services;
 using CodeTestTotal.ViewModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -13,7 +14,8 @@ namespace CodeTestTotal.Controllers
         private readonly IOrdenService _IOrdenService;
         private readonly IUserService _IUserService;
         private UserManager<Usuario> _UserManager;
-        public SellerController(ISellerService ISellerService, IOrdenService IOrdenService, IUserService iUserService, UserManager<Usuario> UserManager)
+        private UserStoreService _UserStoreService;
+        public SellerController(ISellerService ISellerService, IOrdenService IOrdenService, IUserService iUserService, UserManager<Usuario> UserManager )
         {
             _ISellerService = ISellerService;
             _IOrdenService = IOrdenService;
@@ -28,18 +30,16 @@ namespace CodeTestTotal.Controllers
 
             var user = await _IUserService.GetUserById(userID);
             var roles = await _UserManager.IsInRoleAsync(user, "Vendedor");
-           
 
             if (roles == true)
             {
-
                 List<ListSellersViewModel> Model = new List<ListSellersViewModel>();
 
 
                 var listSellers = await _ISellerService.GetAllSellers();
 
-
-                foreach (var seller in listSellers)
+                //List users without the current user
+                foreach (var seller in listSellers.Where(x=>x.VendedorUsuarioID != userID))
                 {
                     ListSellersViewModel oItem = new ListSellersViewModel();
                     oItem.VendedorID = seller.VendedorID;
@@ -86,9 +86,9 @@ namespace CodeTestTotal.Controllers
 
             var user = await _IUserService.GetUserById(userID);
             var roles = await _UserManager.IsInRoleAsync(user, "Vendedor");
+
             if (roles == true)
             {
-
 
                 if (!ModelState.IsValid)
                 {
@@ -96,18 +96,25 @@ namespace CodeTestTotal.Controllers
                 }
                 /*If model is valid, add the new seller*/
                 //1- new user
-                var newUser = await _IUserService.AddUser(newSeller.VendedorUsername, newSeller.VendedorPassword);
 
-                if (newUser == 0)
+                var usuario = new Usuario()
+                {
+                    UsuarioUsername = newSeller.VendedorUsername
+                };
+
+                var result = await _UserManager.CreateAsync(usuario, password: newSeller.VendedorPassword);
+
+
+                if (!result.Succeeded)
                 {
                     ModelState.AddModelError("", "Problemas al agregar el usuario");
                     return View(newSeller);
                 }
 
                 //2- new seller
-                var result = await _ISellerService.AddNewSeller(newSeller, newUser);
+                var resultAddSeller = await _ISellerService.AddNewSeller(newSeller, usuario.UsuarioId);
 
-                if (result)
+                if (resultAddSeller)
                     return RedirectToAction("ListSellers", "Seller");
 
                 return View(newSeller);
