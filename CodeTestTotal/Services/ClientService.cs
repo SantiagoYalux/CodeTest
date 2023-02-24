@@ -20,5 +20,18 @@ namespace CodeTestTotal.Services
         {
             return _DbContext.Clientes;
         }
+
+        public async Task<bool> AddClient(int userID, string ClientName)
+        {
+            bool result = false;
+            Cliente newCLiente = new Cliente();
+            newCLiente.ClienteID = await _DbContext.GetLastId(newCLiente) + 1;
+            newCLiente.ClienteNombre = ClientName;
+            newCLiente.ClienteUsuarioID = userID;
+
+            result = await _DbContext.AddNewRegister(newCLiente);
+
+            return result;
+        }
     }
 }

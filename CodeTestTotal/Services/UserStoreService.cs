@@ -4,12 +4,17 @@ using Microsoft.AspNetCore.Identity;
 
 namespace CodeTestTotal.Services
 {
-    public class UserStoreService : IUserStore<Usuario>, IUserEmailStore<Usuario>, IUserPasswordStore<Usuario>
+    public class UserStoreService : IUserStore<Usuario>, IUserEmailStore<Usuario>, IUserPasswordStore<Usuario>,IUserRoleStore<Usuario>
     {
         private readonly IUserService _IUserService;
         public UserStoreService(IUserService IUserService)
         {
             _IUserService = IUserService;
+        }
+
+        public async Task AddToRoleAsync(Usuario user, string roleName, CancellationToken cancellationToken)
+        {
+            await _IUserService.AddRoleUser(user, roleName);
         }
 
         public async Task<IdentityResult> CreateAsync(Usuario user, CancellationToken cancellationToken)
@@ -69,6 +74,11 @@ namespace CodeTestTotal.Services
             return passwordHash;
         }
 
+        public async Task<IList<string>> GetRolesAsync(Usuario user, CancellationToken cancellationToken)
+        {
+            return await _IUserService.GetUserRoles(user);
+        }
+
         public Task<string> GetUserIdAsync(Usuario user, CancellationToken cancellationToken)
         {
             return Task.FromResult(user.UsuarioId.ToString());
@@ -79,7 +89,23 @@ namespace CodeTestTotal.Services
             return Task.FromResult(user.UsuarioUsername);
         }
 
+        public async Task<IList<Usuario>> GetUsersInRoleAsync(string roleName, CancellationToken cancellationToken)
+        {
+            return await _IUserService.GetUsersInRole(roleName);
+        }
+
         public Task<bool> HasPasswordAsync(Usuario user, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<bool> IsInRoleAsync(Usuario user, string roleName, CancellationToken cancellationToken)
+        {
+            var roles = await GetRolesAsync(user, cancellationToken);
+            return roles.Contains(roleName);
+        }
+
+        public Task RemoveFromRoleAsync(Usuario user, string roleName, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }
@@ -116,9 +142,9 @@ namespace CodeTestTotal.Services
             throw new NotImplementedException();
         }
 
-        public Task<IdentityResult> UpdateAsync(Usuario user, CancellationToken cancellationToken)
+        public async Task<IdentityResult> UpdateAsync(Usuario user, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return IdentityResult.Success;
         }
     }
 }

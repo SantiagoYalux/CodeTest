@@ -1,5 +1,6 @@
 ﻿using CodeTestTotal.Interfaces;
 using CodeTestTotal.Models;
+using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 
@@ -9,11 +10,9 @@ namespace CodeTestTotal.Services
     {
         private DBContext _dbContext;
 
-        private readonly HttpContext _HttpContext;
-        public UserService(DBContext dbContext, IHttpContextAccessor IHttpContextAccessor)
+        public UserService(DBContext dbContext)
         {
             _dbContext = dbContext;
-            _HttpContext = IHttpContextAccessor.HttpContext;
         }
 
         public Task<bool> Login(string username, string password)
@@ -74,19 +73,54 @@ namespace CodeTestTotal.Services
             return Result;
         }
 
-        public int GetCurrentUser()
+
+        public async Task<bool> AddRoleUser(Usuario user, string roleName)
         {
-            if(_HttpContext.User.Identity.IsAuthenticated)
+            int result = 0;
+            UsuarioRol newUserRol = new UsuarioRol();
+            newUserRol.UsuarioRolID = await _dbContext.GetLastId(newUserRol) + 1;
+            newUserRol.UsuarioRolNombre = roleName;
+            newUserRol.UsuarioRolUsuarioId = user.UsuarioId;
+
+            bool resulta = await _dbContext.AddNewRegister(newUserRol);
+
+            return resulta;
+        } 
+        public async Task<List<string>> GetUserRoles(Usuario user)
+        {
+            var usersRoles = _dbContext.UsuarioRoles;
+            List<string> userRolesNames = new List<string>();
+
+            foreach (var rolUser in usersRoles)
             {
-                var idClaim = _HttpContext.User
-                    .Claims.Where(x => x.Type == ClaimTypes.NameIdentifier).FirstOrDefault();
-                var id = int.Parse(idClaim.Value);
-                return id;
+                if (rolUser.UsuarioRolUsuarioId == user.UsuarioId)
+                {
+                    userRolesNames.Add(rolUser.UsuarioRolNombre);
+                }
             }
-            else
+
+            return userRolesNames;
+        }
+        public async Task<List<Usuario>> GetUsersInRole(string RoleName)
+        {
+            var usersRoles = _dbContext.UsuarioRoles;
+            var listUsers = _dbContext.Usuarios;
+            List<Usuario> usuarios = new List<Usuario>();
+
+            foreach (var rolUser in usersRoles)
             {
-                throw new ApplicationException("El usuario no está autenticado");
+                if (rolUser.UsuarioRolNombre == RoleName)
+                {
+                    usuarios.Add(listUsers.Where(x => x.UsuarioId == rolUser.UsuarioRolUsuarioId).First());
+                }
             }
+
+            return usuarios;
+        }
+
+        public async Task<Usuario> GetUserById(int userID)
+        {
+            return _dbContext.Usuarios.FirstOrDefault(x => x.UsuarioId == userID);
         }
     }
 }

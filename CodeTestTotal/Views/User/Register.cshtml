@@ -7,18 +7,24 @@
 
 <h1>Regístrate</h1>
 
-<form asp-action="Register">
+<form asp-action="Register" class="formContacto">
 
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
+    
     <div class="mb-3">
-        <label asp-for="Username" class="form-label"></label>
-        <input asp-for="Username" class="form-control" />
-        <span asp-validation-for="Username" class="text-danger"></span>
+        <label asp-for="UsuarioNombre" class="form-label">Nombre</label>
+        <input asp-for="UsuarioNombre" class="form-control" />
+        <span asp-validation-for="UsuarioNombre" class="text-danger"></span>
     </div>
 
     <div class="mb-3">
-        <label asp-for="Password" class="form-label"></label>
+        <label asp-for="Username" class="form-label">Nombre de usuario</label>
+        <input asp-for="Username" class="form-control" />
+        <span asp-validation-for="Username" class="text-danger"></span>
+    </div>
+    
+    <div class="mb-3">
+        <label asp-for="Password" class="form-label">Contraseña</label>
         <input asp-for="Password" type="password" class="form-control" />
         <span asp-validation-for="Password" class="text-danger"></span>
     </div>

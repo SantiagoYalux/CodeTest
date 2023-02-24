@@ -24,9 +24,10 @@ builder.Services.AddSingleton<IPetService, PetService>();
 builder.Services.AddSingleton<IOrdenService, OrderService>();
 builder.Services.AddSingleton<ISellerService, SellerService>();
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddTransient<IUserStore<Usuario>, UserStoreService>();
+builder.Services.AddScoped<IUserStore<Usuario>, UserStoreService>();
 builder.Services.AddIdentityCore<Usuario>();
 builder.Services.AddTransient<SignInManager<Usuario>>();
+
 
 builder.Services.AddIdentityCore<Usuario>(opciones =>
 {
@@ -48,10 +49,11 @@ builder.Services.AddAuthentication(options =>
     opciones.LoginPath = "/User/Login";
 });
 
+builder.Services.ConfigureApplicationCookie(options => {
+    options.AccessDeniedPath = "/User/Login";
+});
 
-
-// Add services to the container.
-//builder.Services.AddControllersWithViews();
+builder.Services.AddIdentityCore<Usuario>();
 
 var app = builder.Build();
 

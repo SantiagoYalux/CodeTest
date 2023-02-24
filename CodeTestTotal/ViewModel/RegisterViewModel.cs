@@ -5,6 +5,8 @@ namespace CodeTestTotal.ViewModel
     public class RegisterViewModel
     {
         [Required(ErrorMessage ="El campo {0} es requerido")]
+        public string UsuarioNombre { get; set; }
+        [Required(ErrorMessage ="El campo {0} es requerido")]
         public string Username { get; set; }
 
         [Required(ErrorMessage = "El campo {0} es requerido")]

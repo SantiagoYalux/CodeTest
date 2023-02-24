@@ -1,9 +1,43 @@
-﻿@using Microsoft.AspNetCore.Identity;
+﻿@inject SignInManager<Usuario> SignInManager;
+@inject UserManager<Usuario> UserManager;
+@inject IUserService IUserService;
+@using CodeTestTotal.Interfaces;
+@using Microsoft.AspNetCore.Identity;
 @inject SignInManager<Usuario> SignInManager
 
 <ul class="navbar-nav">
     @if (SignInManager.IsSignedIn(User))
     {
+        <ul class="navbar-nav flex-grow-1">
+            @{
+                var claims = User.Claims.ToList();
+                var userID = int.Parse(claims[0].Value);
+
+                var user = await IUserService.GetUserById(userID);
+                var roles = await UserManager.IsInRoleAsync(user, "Cliente");
+
+                @if (roles == true)
+                {
+                
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Client" asp-action="Index">Tus mascotas</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Client" asp-action="ListClientPets">Clientes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="ListOrders">ss asdas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Seller" asp-action="ListSellers">ListaVendedores</a>
+                    </li>
+                }
+            }
+        </ul>
+
         <li class="nav-item">
             <span class="nav-link text-dark">Hola, @User.Identity.Name</span>
         </li>

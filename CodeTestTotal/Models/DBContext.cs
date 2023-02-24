@@ -21,12 +21,14 @@ namespace CodeTestTotal.Models
             ClientesJsonPath = Path.Combine(_AbsolutePath.ToString(), "DataContent", "Clientes.json");
             VendedoresJsonPath = Path.Combine(_AbsolutePath.ToString(), "DataContent", "Vendedores.json");
             PedidosJsonPath = Path.Combine(_AbsolutePath.ToString(), "DataContent", "Pedidos.json");
+            UsuarioRolesJsonPath = Path.Combine(_AbsolutePath.ToString(), "DataContent", "UsuarioRoles.json");
 
             FillUsuarios();
             FillClientes();
             FillMascotas();
             FillPedidos();
             FillVendedores();
+            FillUsuarioRoles();
         }
 
         /*In this Class, we are going to make all the necessary functions to handle our json files (Data files) */
@@ -35,6 +37,7 @@ namespace CodeTestTotal.Models
         public List<Mascota> Mascotas { get; set; }
         public List<Vendedor> Vendedores { get; set; }
         public List<Pedido> Pedidos { get; set; }
+        public List<UsuarioRol> UsuarioRoles { get; set; }
 
         /*Json files Path*/
         private string MascotasJsonPath = "";
@@ -42,6 +45,7 @@ namespace CodeTestTotal.Models
         private string ClientesJsonPath = "";
         private string VendedoresJsonPath = "";
         private string PedidosJsonPath = "";
+        private string UsuarioRolesJsonPath = "";
 
         private async void FillUsuarios()
         {
@@ -103,6 +107,18 @@ namespace CodeTestTotal.Models
             else
                 Vendedores = new List<Vendedor>();
         }
+        private async void FillUsuarioRoles()
+        {
+
+            /*Get context from Usuarios json file*/
+            string context = await File.ReadAllTextAsync(UsuarioRolesJsonPath);
+
+            /*deserialize the content and assign to the User list*/
+            if (context.Length > 0)
+                UsuarioRoles = JsonSerializer.Deserialize<List<UsuarioRol>>(context);
+            else
+                UsuarioRoles = new List<UsuarioRol>();
+        }
 
         public async Task<bool> AddNewRegister(object newObject)
         {
@@ -146,6 +162,13 @@ namespace CodeTestTotal.Models
                     var JsonPedidos = JsonSerializer.Serialize(Pedidos);
 
                     System.IO.File.WriteAllText(PedidosJsonPath, JsonPedidos);
+                    resultado = true;
+                    break;
+                case "UsuarioRol":
+                    UsuarioRoles.Add((UsuarioRol)newObject);
+                    var JsonUsuarioRoles = JsonSerializer.Serialize(UsuarioRoles);
+
+                    System.IO.File.WriteAllText(UsuarioRolesJsonPath, JsonUsuarioRoles);
                     resultado = true;
                     break;
 
@@ -218,6 +241,17 @@ namespace CodeTestTotal.Models
                     System.IO.File.WriteAllText(PedidosJsonPath, JsonPedidos);
                     resultado = true;
                     break;
+                case "UsuarioRol":
+                    /*Remove the register*/
+                    UsuarioRoles.RemoveAll(x => x.UsuarioRolID == ((UsuarioRol)newObject).UsuarioRolID);
+
+                    /*Add the Mod register*/
+                    UsuarioRoles.Add((UsuarioRol)newObject);
+                    var JsonUsuarioRoles = JsonSerializer.Serialize(UsuarioRoles);
+
+                    System.IO.File.WriteAllText(UsuarioRolesJsonPath, JsonUsuarioRoles);
+                    resultado = true;
+                    break;
 
                 default:
                     break;
@@ -234,24 +268,28 @@ namespace CodeTestTotal.Models
             switch (type.Name)
             {
                 case "Mascota":
-                    if(Mascotas.Count > 0)
-                        resultado = Mascotas.Max(x=> x.MascotaID);
+                    if (Mascotas.Count > 0)
+                        resultado = Mascotas.Max(x => x.MascotaID);
                     break;
                 case "Usuario":
                     if (Usuarios.Count > 0)
-                        resultado = Usuarios.Max(x=> x.UsuarioId);
+                        resultado = Usuarios.Max(x => x.UsuarioId);
                     break;
                 case "Vendedor":
                     if (Vendedores.Count > 0)
-                        resultado = Vendedores.Max(x=> x.VendedorID);
+                        resultado = Vendedores.Max(x => x.VendedorID);
                     break;
                 case "Cliente":
                     if (Clientes.Count > 0)
-                        resultado = Clientes.Max(x=> x.ClienteID);
+                        resultado = Clientes.Max(x => x.ClienteID);
                     break;
                 case "Pedido":
                     if (Pedidos.Count > 0)
-                        resultado = Pedidos.Max(x=> x.PedidoID);
+                        resultado = Pedidos.Max(x => x.PedidoID);
+                    break;
+                case "UsuarioRol":
+                    if (UsuarioRoles.Count > 0)
+                        resultado = UsuarioRoles.Max(x => x.UsuarioRolID);
                     break;
 
                 default:
