@@ -16,13 +16,15 @@ namespace CodeTestTotal.Controllers
         private readonly IClientService _IClientService;
         private readonly IUserService _IUserService;
         private UserManager<Usuario> _UserManager;
-        public OrderController(IOrdenService IOrdenService, IPetService IPetService, IClientService IClientService, IUserService iUserService, UserManager<Usuario> UserManager)
+        private ISellerService _ISellerService;
+        public OrderController(IOrdenService IOrdenService, IPetService IPetService, IClientService IClientService, IUserService iUserService, UserManager<Usuario> UserManager, ISellerService ISellerService)
         {
             _IOrdenService = IOrdenService;
             _IPetService = IPetService;
             _IClientService = IClientService;
             _IUserService = iUserService;
             _UserManager = UserManager;
+            _ISellerService = ISellerService;
         }
 
         public async Task<ActionResult> NewOrder(int mascotaID, string nameMascota)
@@ -195,7 +197,7 @@ namespace CodeTestTotal.Controllers
                     ListOrdersViewModel oListOrdersViewModel = new ListOrdersViewModel();
 
                     var oPet = _IPetService.GetPetByID(oItem.PedidoMascotaID);
-                    var client = _IClientService.GetClient(oPet.MascotaClientID);
+                    var client = _IClientService.GetClientByID(oPet.MascotaClientID);
 
                     oListOrdersViewModel.PedidoID = oItem.PedidoID;
                     oListOrdersViewModel.MascotaNombre = oPet.MascotaNombre;
@@ -238,11 +240,12 @@ namespace CodeTestTotal.Controllers
                 {
                     return View();
                 }
+                var vendedor = await _ISellerService.GetSellerByUserID(userID);
 
-                var result = await _IOrdenService.MaskAsDespachado(PedidoID);
+                var result = await _IOrdenService.MaskAsDespachado(PedidoID, vendedor.VendedorID);
 
                 if (result)
-                    return RedirectToAction("ListOrders", "Order");
+                    return await ListOrders();
 
                 return View();
             }

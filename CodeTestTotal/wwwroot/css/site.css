@@ -57,19 +57,7 @@ body {
         font-size: 16px;
     }
 
-@media (max-width: 600px) {
 
-    .formContacto {
-        width: 100% !important;
-    }
-}
-
-@media (max-width: 800px) {
-
-    .formContacto {
-        width: 60% !important;
-    }
-}
 
 
 /*End users views*/
@@ -148,7 +136,7 @@ body {
     background-color: white;
     padding: 1em;
     border-radius: 1em;
-    box-shadow: inset 0 -3em 3em rgba(0,0,0,0.1), 0 0 0 2px rgb(255,255,255), 0.3em 0.3em 1em rgba(0,0,0,0.3);
+    box-shadow: 7px 13px 37px #000;
 }
 
 .formNewOrder {
@@ -157,8 +145,18 @@ body {
     padding: 1em;
     width: 30%;
     margin: 0 auto;
-}
 
+}
+    .formNewOrder button {
+        width: 100%;
+        /*LightGreen*/
+        transition: 0.3s;
+        background-color: #2196f3;
+        text-decoration: none;
+        padding: .5em;
+        border-radius: .2em;
+        margin-top: .2em;
+    }
 .formContent {
     display: flex;
     flex-direction: column;
@@ -195,18 +193,19 @@ body {
     margin: 0 auto;
     justify-content: space-between;
     padding: .5em;
+
 }
 
     .PetData div p {
         width: 5em;
-        border: 1px double black;
+        border: 1px double rgb(16, 67, 126);
         border-radius: 1em;
         margin: 0;
         text-align: center;
     }
 
         .PetData div p:first-child {
-            text-align: left !important;
+            text-align: center !important;
             border: none;
         }
 
@@ -632,4 +631,78 @@ hr {
 
 .centrarColumna{
     text-align:center;
+}
+
+
+@media (max-width: 1200px) {
+
+    .formContacto {
+        width: 60% !important;
+    }
+    .Tarjeta {
+        width: 50% !important;
+    }
+
+    .card{
+        width:35%;
+    }
+}
+
+@media (max-width: 500px) {
+
+    .formContacto {
+        width: 60% !important;
+    }
+
+    .Tarjeta {
+        width: 100% !important;
+    }
+
+    .card {
+        width: 90%;
+    }
+    .ClientPetsItem{
+        width:90%; 
+    }
+    .ClientPets{
+        width:90%;
+    }
+
+
+}
+
+
+@media (max-width: 900px) {
+    .ClientPetsItem {
+        width: 80%;
+    }
+
+    .ClientPets {
+        width: 80%;
+    }
+
+    .OrderList {
+        width: 90%;
+    }
+
+    .OrderListItem {
+        width: 90%;
+    }
+}
+@media (max-width: 1200px) {
+
+    .ClientPetsItem {
+        width: 60%;
+    }
+
+    .ClientPets {
+        width: 60%;
+    }
+    .OrderList {
+        width: 70%;
+    }
+
+    .OrderListItem {
+        width: 70%;
+    }
 }

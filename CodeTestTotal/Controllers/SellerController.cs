@@ -104,7 +104,6 @@ namespace CodeTestTotal.Controllers
 
                 var result = await _UserManager.CreateAsync(usuario, password: newSeller.VendedorPassword);
 
-
                 if (!result.Succeeded)
                 {
                     ModelState.AddModelError("", "Problemas al agregar el usuario");
@@ -113,6 +112,10 @@ namespace CodeTestTotal.Controllers
 
                 //2- new seller
                 var resultAddSeller = await _ISellerService.AddNewSeller(newSeller, usuario.UsuarioId);
+
+                var newUser = await _IUserService.SearchUserByUsername(usuario.UsuarioUsername.ToUpper());
+
+                await _UserManager.AddToRoleAsync(newUser, "Vendedor");
 
                 if (resultAddSeller)
                     return RedirectToAction("ListSellers", "Seller");

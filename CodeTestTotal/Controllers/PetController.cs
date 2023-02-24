@@ -77,6 +77,7 @@ namespace CodeTestTotal.Controllers
                 }
 
                 var client = _IClientService.GetClient(userID);
+
                 if(client == null)
                 {
                     ModelState.AddModelError(string.Empty, "El usuario no tiene relacionado un cliente, no podrá realizar ésta operación");

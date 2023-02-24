@@ -11,7 +11,7 @@
             <th scope="col">Fecha pedido</th>
             <th scope="col">Fecha Despachado</th>
             <th scope="col">Vendedor</th>
-            <th scope="col">Pedido</th>
+            @*<th scope="col">Pedido</th>*@
             <th scope="col">Despachar</th>
         </tr>
     </thead>
@@ -26,12 +26,12 @@
                 <td>@oPurchaseOrder.PedidoFechaDespachado</td>
                 <td>@oPurchaseOrder.PedidoVendedorNombre</td>
 
-                <td>
+@*                <td>
                     <button class="btn btnInfo btn btn-success btnAbrirOffScrolling" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling"
                         aria-controls="offcanvasScrolling" onclick="ShowOrder(@oPurchaseOrder.PedidoID)">
                         Info
                     </button>
-                </td>
+                </td>*@
 
                 @if (@oPurchaseOrder.PedidoFechaDespachado == null)
                 {

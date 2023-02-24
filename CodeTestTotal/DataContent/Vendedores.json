@@ -5,12 +5,5 @@
     "VendedorApellido": "Coin",
     "VendedorFechaIncorporaci\u00F3n": "2017-08-22T06:11:00Z",
     "VendedorUsuarioID": 1
-  },
-  {
-    "VendedorID": 2,
-    "VendedorNombre": "Vendedor1",
-    "VendedorApellido": "Yalux",
-    "VendedorFechaIncorporaci\u00F3n": "2022-10-24T00:00:00",
-    "VendedorUsuarioID": 2
   }
 ]

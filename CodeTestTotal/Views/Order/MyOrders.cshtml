@@ -3,26 +3,26 @@
 
 <section class="OrderList">
 
-    <h2>Pedidos @Model.First().PetName</h2>
-    @if(Model.Count > 0)
+    @if (Model.Count > 0)
     {
-    @foreach (MyOrdersViewModel oItem in Model)
-    {
+        <h2>Pedidos @Model.First().PetName</h2>
+        @foreach (MyOrdersViewModel oItem in Model)
+        {
 
-        <article class="OrderListItem">
-            <div class="imgDiv">
-                <img src="/Images/@oItem.PetFoodImage" class="petImg">
+            <article class="OrderListItem">
+                <div class="imgDiv">
+                    <img src="/Images/@oItem.PetFoodImage" class="petImg">
 
-            </div>
+                </div>
 
-            <div class="OrderData">
-                <p>@oItem.OrderMessage</p>
-            </div>
+                <div class="OrderData">
+                    <p>@oItem.OrderMessage</p>
+                </div>
 
-            <div class="OrderDespachadoData">
-                <p class="dataDespacho">Despachado</p>
-                <img src="/Images/@oItem.PetOrderProgressImage" alt="">
-            </div>
+                <div class="OrderDespachadoData">
+                    <p class="dataDespacho">Despachado</p>
+                    <img src="/Images/@oItem.PetOrderProgressImage" alt="">
+                </div>
             </article>
         }
     }

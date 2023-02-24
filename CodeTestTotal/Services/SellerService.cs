@@ -16,6 +16,10 @@ namespace CodeTestTotal.Services
         {
             return _DbContext.Vendedores.ToList();
         }
+        public async Task<Vendedor> GetSellerByUserID(int userID)
+        {
+            return _DbContext.Vendedores.FirstOrDefault(x=>x.VendedorUsuarioID == userID);
+        }
         public async Task<bool> AddNewSeller(AddSellerViewModel oNewSellerViewModel, int newUserID)
         {
             bool result = false;

@@ -7,5 +7,6 @@ namespace CodeTestTotal.Interfaces
         Task<bool> AddClient(int userID, string ClientName);
         List<Cliente> GetAllClients();
         Cliente GetClient(int UserID);
+        Cliente GetClientByID(int ClientID);
     }
 }

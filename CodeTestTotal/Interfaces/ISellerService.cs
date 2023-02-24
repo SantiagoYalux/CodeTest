@@ -7,5 +7,6 @@ namespace CodeTestTotal.Interfaces
     {
         Task<bool> AddNewSeller(AddSellerViewModel oNewSellerViewModel, int newUserID);
         Task<List<Vendedor>> GetAllSellers();
+        Task<Vendedor> GetSellerByUserID(int userID);
     }
 }

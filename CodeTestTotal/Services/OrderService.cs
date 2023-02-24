@@ -51,7 +51,7 @@ namespace CodeTestTotal.Services
             return Pedidos;
         }
 
-        public async Task<bool> MaskAsDespachado(int PedidoID)
+        public async Task<bool> MaskAsDespachado(int PedidoID, int vendedorID)
         {
             bool result = false;
 
@@ -61,8 +61,9 @@ namespace CodeTestTotal.Services
             {
                 pedido.PedidoFechaDespachado = DateTime.Now;
                 pedido.PedidoDespachado = true;
-                pedido.PedidoVendedorID = 1;
-                pedido.PedidoVendedorNombre = "Santiago";
+                pedido.PedidoVendedorID = vendedorID;
+                var vendedor = _DbContext.Vendedores.FirstOrDefault(x => x.VendedorID == vendedorID);
+                pedido.PedidoVendedorNombre = vendedor.VendedorNombre;
                 result = await _DbContext.ModRegister(pedido);
             }
 

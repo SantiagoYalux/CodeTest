@@ -15,6 +15,10 @@ namespace CodeTestTotal.Services
         {
             return _DbContext.Clientes.FirstOrDefault(x => x.ClienteUsuarioID == UserID);
         }
+        public Cliente GetClientByID(int ClientID)
+        {
+            return _DbContext.Clientes.FirstOrDefault(x => x.ClienteID == ClientID);
+        }
 
         public List<Cliente> GetAllClients()
         {
